@@ -1,5 +1,1 @@
-# CepeinJPA
-Projeto educativo criado com o propósito de facilitar o uso de mapeamento com JPA.
-OBS:
-1- JAVA 11.
-2- SPRING BOOT 3.1.4.
+Um projeto educativo concebido com o objetivo de facilitar a compreensão do mapeamento com JPA, empregando Java 11 e Spring Boot 3.1.4.
