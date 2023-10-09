@@ -1,4 +1,4 @@
-package cepein.mapeamento.produto.model;
+package cepein.mapeamento.pedido.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -11,17 +11,16 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "produto")
+@Table(name = "pedido")
 @Entity
 @Getter
 @Setter
-public class Produto {
-
+public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_produto")
-    private Long idProduto;
+    private Long idPedido;
     private UUID uuid;
     @Size(max = 70, message = "O campo 'descricao' deve ter no máximo {max} caracteres")
     private String descricao;
+
 }

@@ -1,7 +1,7 @@
-package cepein.mapeamento.produto.model;
+package cepein.mapeamento.curso.model;
 
+import cepein.mapeamento.pessoa.model.Pessoa;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,17 +11,21 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "produto")
+@Table
 @Entity
 @Getter
 @Setter
-public class Produto {
+public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_produto")
-    private Long idProduto;
+    private Long idCurso;
+
     private UUID uuid;
-    @Size(max = 70, message = "O campo 'descricao' deve ter no máximo {max} caracteres")
+
     private String descricao;
+
+    private String uuidPessoa;
+
+    private Pessoa pessoa;
 }
