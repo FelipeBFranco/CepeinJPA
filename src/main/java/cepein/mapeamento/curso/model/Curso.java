@@ -27,5 +27,7 @@ public class Curso {
 
     private String uuidPessoa;
 
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 }

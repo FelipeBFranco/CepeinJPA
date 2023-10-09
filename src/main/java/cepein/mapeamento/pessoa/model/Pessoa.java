@@ -28,6 +28,8 @@ public class Pessoa {
     @Size(max = 70, message = "O campo 'nome' deve ter no máximo {max} caracteres!")
     private String nome;
 
+    @OneToOne
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
     private String uuidEndereco;
