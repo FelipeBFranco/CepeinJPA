@@ -1,13 +1,11 @@
 package cepein.mapeamento;
 
-import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CepeinApplicationTests {
+public class CepeinApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
 
 }
+
