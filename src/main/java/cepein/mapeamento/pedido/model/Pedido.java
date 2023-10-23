@@ -19,6 +19,9 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPedido;
+    
+    @ManyToMany
+    @JoinColumn(name = "pessoa_pedido_pedido")
     private UUID uuid;
     @Size(max = 70, message = "O campo 'descricao' deve ter no máximo {max} caracteres")
     private String descricao;

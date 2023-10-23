@@ -21,6 +21,7 @@ public class Endereco {
     @Column(name = "id_endereco")
     private Long id;
     
-
+    @OneToOne
+    @JoinColumn(name = "pessoa_endereco")
     private String uuid;
     }
