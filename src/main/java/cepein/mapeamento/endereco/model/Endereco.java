@@ -19,9 +19,11 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
+    @OneToOne
+    @JoinColumn(name = "pessoa_id_endereco")
     private Long id;
     
     @OneToOne
-    @JoinColumn(name = "pessoa_endereco")
+    @JoinColumn(name = "pessoa_uuid_endereco")
     private String uuid;
     }
