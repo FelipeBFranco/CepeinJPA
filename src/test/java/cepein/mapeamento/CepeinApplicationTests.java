@@ -29,8 +29,10 @@ public class CepeinApplicationTests {
 
         Pessoa pessoaSalva = service.salvar(pessoa);
 
-        //Assertions.assertNull(pessoaSalva);
+
+        Assertions.assertEquals(pessoaSalva.getNome(), pessoa.getNome());
     }
+
 
 
 }
