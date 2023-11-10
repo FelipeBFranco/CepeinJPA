@@ -2,17 +2,12 @@ package cepein.mapeamento.pessoa.model;
 
 
 import cepein.mapeamento.endereco.model.Endereco;
-import cepein.mapeamento.pedido.model.Pedido;
-import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,16 +15,23 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-
 public class Pessoa {
 
     @Id
+    @Column(name = "id_pessoa")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPessoa;
+    
+    @Column(name = "uuid_pessoa")
+    @NotNull(message = " campo de {uuid_pessoa} não pode estar nulo/vazio")
+    private String uuidPessoa;
 
-    private String nome;
-
-    @OneToMany(mappedBy = "pessoa")
-    private List<Produto> produtos;
+    @Column(name = "nome_pessoa")
+    @NotNull(message = " campo de {nome_pessoa} não pode estar nulo/vazio")
+    private String nomePessoa;
+    
+    @OneToOne()
+    @JoinColumn(name = "id_endereco_fk")
+    private Endereco Endereco;
 
 }

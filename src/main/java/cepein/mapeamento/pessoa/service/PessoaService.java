@@ -1,22 +1,22 @@
 package cepein.mapeamento.pessoa.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import cepein.mapeamento.pessoa.model.Pessoa;
 import cepein.mapeamento.pessoa.repository.PessoaRepository;
 
+@Service
 public class PessoaService {
 
-    private PessoaRepository pessoaRepository;
-
-    public PessoaService(PessoaRepository pessoaRepository) {
-        this.pessoaRepository = pessoaRepository;
-    }
-
-    public Pessoa salvar(Pessoa pessoa) {
-        return pessoaRepository.save(pessoa);
-    }
-
-    public Pessoa buscarPeloId(Long id) {
-        return pessoaRepository.findById(id).orElse(null);
-    }
+	@Autowired
+    private PessoaRepository repositorioInformacoesPessoas;
+	
+	public List<Pessoa> getTodasPessoas() {
+		List<Pessoa> pessoasEncontrados = this.repositorioInformacoesPessoas.findAll();
+		return pessoasEncontrados;
+	}
 
 }
