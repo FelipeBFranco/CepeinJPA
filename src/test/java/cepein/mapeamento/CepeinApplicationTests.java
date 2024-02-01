@@ -1,9 +1,6 @@
 package cepein.mapeamento;
 
 
-import cepein.mapeamento.pessoa.model.Pessoa;
-import cepein.mapeamento.pessoa.repository.PessoaRepository;
-import cepein.mapeamento.pessoa.service.PessoaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
