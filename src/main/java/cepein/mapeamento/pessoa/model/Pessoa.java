@@ -1,36 +1,37 @@
 package cepein.mapeamento.pessoa.model;
 
-
 import cepein.mapeamento.endereco.model.Endereco;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "pessoa")
-@Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "pessoa")
 public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPessoa;
+    private Long id_Pessoa;
 
-    private UUID uuid;
-
-    @Size(max = 70, message = "O campo 'nome' deve ter no máximo {max} caracteres!")
     private String nome;
 
-    @OneToOne
-    @JoinColumn(name = "id_endereco")
-    private Endereco endereco;
+    private String uuid;
 
-    private String uuidEndereco;
+    @OneToOne
+    @JoinColumn(name = "id_endereco_fk", referencedColumnName = "id_endereco")
+    private Endereco enderecoPorId;
+
+   /* @OneToOne
+    @JoinColumn(name = "uuid_endereco_fk", referencedColumnName = "uuid")
+    private Endereco enderecoPorUuid;*/
+    @Column(name = "uuid_endereco_fk")
+    private String enderecoPorUuid;
+
 }
