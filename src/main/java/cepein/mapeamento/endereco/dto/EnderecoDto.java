@@ -15,9 +15,11 @@ public class EnderecoDto {
     private Long id_endereco;
 
     private String uuid;
+
+
     public static List<EnderecoDto> convet(List<Endereco> enderecoList){
         return enderecoList.stream()
-                .map(endereco -> new EnderecoDto(endereco.getId_endereco(),endereco.getUuid()))
+                .map(endereco -> new EnderecoDto(endereco.getIdEndereco(),endereco.getUuid()))
                 .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package cepein.mapeamento.endereco.model;
 
+import cepein.mapeamento.pessoa.model.Pessoa;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,10 @@ import java.util.UUID;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_endereco;
+    @JoinColumn(name = "id_endereco")
+    private Long idEndereco;
 
     private String uuid;
+
+
 }
