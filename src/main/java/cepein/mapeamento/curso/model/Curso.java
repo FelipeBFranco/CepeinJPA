@@ -21,10 +21,10 @@ public class Curso {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "id_curso_fk" , referencedColumnName = "id_Pessoa")
+    @JoinColumn(name = "id_pessoa_fk" , referencedColumnName = "id_pessoa")
     private Pessoa pessoaPorId;
 
     @ManyToOne
-    @JoinColumn(name = "uuid_curso_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "uuid_pessoa_fk", referencedColumnName = "uuid")
     private Pessoa pessoaPorUuid;
 }
