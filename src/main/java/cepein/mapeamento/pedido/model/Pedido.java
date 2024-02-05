@@ -1,4 +1,4 @@
-package cepein.mapeamento.Pedido.Model;
+package cepein.mapeamento.pedido.model;
 
 import jakarta.persistence.*;
 
