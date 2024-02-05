@@ -28,10 +28,7 @@ public class Pessoa {
     @JoinColumn(name = "id_endereco_fk", referencedColumnName = "id_endereco")
     private Endereco enderecoPorId;
 
-   /* @OneToOne
+    @OneToOne
     @JoinColumn(name = "uuid_endereco_fk", referencedColumnName = "uuid")
-    private Endereco enderecoPorUuid;*/
-    @Column(name = "uuid_endereco_fk")
-    private String enderecoPorUuid;
-
+    private Endereco enderecoPorUuid;
 }

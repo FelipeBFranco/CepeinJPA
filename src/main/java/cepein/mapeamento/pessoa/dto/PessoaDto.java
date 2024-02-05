@@ -21,7 +21,7 @@ public class PessoaDto {
 
     private Endereco enderecoPorId;
 
-    private String enderecoPorUuid;
+    private Endereco enderecoPorUuid;
 
     public static List<PessoaDto> convet(List<Pessoa> pessoaList){
         return pessoaList.stream()
