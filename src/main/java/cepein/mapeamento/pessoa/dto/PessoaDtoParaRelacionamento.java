@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
-public class PessoaDtoParaCurso {
+public class PessoaDtoParaRelacionamento {
+
     private Long id;
 
     private String nome;
@@ -17,15 +18,15 @@ public class PessoaDtoParaCurso {
     private String uuid;
 
 
-    public PessoaDtoParaCurso (Pessoa pessoa){
+    public PessoaDtoParaRelacionamento(Pessoa pessoa){
         this.id = pessoa.getId_pessoa();
         this.nome = pessoa.getNome();
         this.uuid = pessoa.getUuid();
 
     }
-    public static List<PessoaDtoParaCurso> convet(List<Pessoa> pessoaList){
+    public static List<PessoaDtoParaRelacionamento> convet(List<Pessoa> pessoaList){
         return pessoaList.stream()
-                .map(PessoaDtoParaCurso::new)
+                .map(PessoaDtoParaRelacionamento::new)
                 .collect(Collectors.toList());
     }
 

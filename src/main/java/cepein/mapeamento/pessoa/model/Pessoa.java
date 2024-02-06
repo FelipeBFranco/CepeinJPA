@@ -2,6 +2,7 @@ package cepein.mapeamento.pessoa.model;
 
 import cepein.mapeamento.curso.model.Curso;
 import cepein.mapeamento.endereco.model.Endereco;
+import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,4 +41,12 @@ public class Pessoa {
 
     @OneToMany(mappedBy = "pessoaPorUuid")
     private List<Curso> cursoPorUuid;
+
+    @ManyToMany
+    @JoinTable(name="pessoa_produto",
+            joinColumns=
+            @JoinColumn(name="id_pessoa_fk", referencedColumnName="id_pessoa"),
+            inverseJoinColumns=
+            @JoinColumn(name="id_produto_fk", referencedColumnName="id"))
+    private List<Produto> produtoListComJoinTable;
 }

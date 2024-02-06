@@ -10,17 +10,17 @@ import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
-public class ProdutoDto {
+public class ProdutoDtoParaRelacionamento {
 
     private Long id;
 
     private String Descricao;
 
-    private List<PessoaDtoParaRelacionamento> pessoaListComJoinTable;
 
-    public static List<ProdutoDto> converter(List<Produto> produtoList){
+
+    public static List<ProdutoDtoParaRelacionamento> converter(List<Produto> produtoList){
         return produtoList.stream()
-                .map(produto -> new ProdutoDto(produto.getId(), produto.getDescricao(),PessoaDtoParaRelacionamento.convet(produto.getPessoaListComJoinTable())))
+                .map(produto -> new ProdutoDtoParaRelacionamento(produto.getId(), produto.getDescricao()))
                 .collect(Collectors.toList());
     }
 }

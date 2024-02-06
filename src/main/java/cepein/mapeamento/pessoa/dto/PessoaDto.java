@@ -1,10 +1,10 @@
 package cepein.mapeamento.pessoa.dto;
 
-import cepein.mapeamento.curso.dto.CursoDtoParaPessoa;
-import cepein.mapeamento.curso.model.Curso;
+import cepein.mapeamento.curso.dto.CursoDtoParaRelacionamento;
 import cepein.mapeamento.endereco.model.Endereco;
 import cepein.mapeamento.pessoa.model.Pessoa;
 
+import cepein.mapeamento.produto.dto.ProdutoDtoParaRelacionamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -25,8 +25,10 @@ public class PessoaDto {
 
     private Endereco enderecoPorUuid;
 
-    private List<CursoDtoParaPessoa> cursoListPorId;
-    private List<CursoDtoParaPessoa> cursoListPorUuid;
+    private List<CursoDtoParaRelacionamento> cursoListPorId;
+    private List<CursoDtoParaRelacionamento> cursoListPorUuid;
+
+    private List<ProdutoDtoParaRelacionamento> produtoListComJoinTable;
 
     public PessoaDto (Pessoa pessoa){
         this.id = pessoa.getId_pessoa();
@@ -34,8 +36,9 @@ public class PessoaDto {
         this.uuid = pessoa.getUuid();
         this.enderecoPorId = pessoa.getEnderecoPorId();
         this.enderecoPorUuid = pessoa.getEnderecoPorUuid();
-        this.cursoListPorId = CursoDtoParaPessoa.converter(pessoa.getCursoPorId());
-        this.cursoListPorUuid = CursoDtoParaPessoa.converter(pessoa.getCursoPorUuid());
+        this.cursoListPorId = CursoDtoParaRelacionamento.converter(pessoa.getCursoPorId());
+        this.cursoListPorUuid = CursoDtoParaRelacionamento.converter(pessoa.getCursoPorUuid());
+        this.produtoListComJoinTable = ProdutoDtoParaRelacionamento.converter(pessoa.getProdutoListComJoinTable());
     }
     public static List<PessoaDto> convet(List<Pessoa> pessoaList){
         return pessoaList.stream()

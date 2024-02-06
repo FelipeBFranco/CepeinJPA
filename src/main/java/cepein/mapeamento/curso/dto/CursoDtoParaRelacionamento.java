@@ -9,15 +9,15 @@ import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
-public class CursoDtoParaPessoa {
+public class CursoDtoParaRelacionamento {
     private Long id;
 
     private String descricao;
 
 
-    public static List<CursoDtoParaPessoa> converter(List<Curso> cursos){
+    public static List<CursoDtoParaRelacionamento> converter(List<Curso> cursos){
         return cursos.stream()
-                .map(curso -> new CursoDtoParaPessoa(curso.getId_curso(), curso.getDescricao()))
+                .map(curso -> new CursoDtoParaRelacionamento(curso.getId_curso(), curso.getDescricao()))
                 .collect(Collectors.toList());
     }
 }
