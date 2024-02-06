@@ -27,7 +27,7 @@ public class EnderecoService {
     public ResponseEntity<EnderecoDto> procurarEndereco(Long idEndereco){
         Endereco endereco = this.enderecoRepository.findById(idEndereco)
                 .orElseThrow(()-> new RuntimeException("endereco não encontrado"));
-        EnderecoDto enderecoDto = new EnderecoDto(endereco.getIdEndereco(),endereco.getUuid());
+        EnderecoDto enderecoDto = new EnderecoDto(endereco);
         return ResponseEntity.ok(enderecoDto);
     }
     public ResponseEntity<Void> cadastrarEndereco(EnderecoForms enderecoForms){

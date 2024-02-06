@@ -23,5 +23,11 @@ public class Endereco {
 
     private String uuid;
 
+    @OneToOne(mappedBy = "enderecoPorId")
+    private Pessoa pessoaPorId;
+
+    @OneToOne(mappedBy = "enderecoPorUuid")
+    private Pessoa pessoaPorUuid;
+
 
 }

@@ -1,6 +1,7 @@
 package cepein.mapeamento.pessoa.dto;
 
 import cepein.mapeamento.curso.dto.CursoDtoParaRelacionamento;
+import cepein.mapeamento.endereco.dto.EnderecoDtoParaRelacionamento;
 import cepein.mapeamento.endereco.model.Endereco;
 import cepein.mapeamento.pedido.dto.PedidoDtoParaRelacionamento;
 import cepein.mapeamento.pedido.model.Pedido;
@@ -24,9 +25,9 @@ public class PessoaDto {
 
     private String uuid;
 
-    private Endereco enderecoPorId;
+    private EnderecoDtoParaRelacionamento enderecoPorId;
 
-    private Endereco enderecoPorUuid;
+    private EnderecoDtoParaRelacionamento enderecoPorUuid;
 
     private List<CursoDtoParaRelacionamento> cursoListPorId;
     private List<CursoDtoParaRelacionamento> cursoListPorUuid;
@@ -39,8 +40,8 @@ public class PessoaDto {
         this.id = pessoa.getId_pessoa();
         this.nome = pessoa.getNome();
         this.uuid = pessoa.getUuid();
-        this.enderecoPorId = pessoa.getEnderecoPorId();
-        this.enderecoPorUuid = pessoa.getEnderecoPorUuid();
+        this.enderecoPorId = new EnderecoDtoParaRelacionamento( pessoa.getEnderecoPorId());
+        this.enderecoPorUuid = new EnderecoDtoParaRelacionamento( pessoa.getEnderecoPorUuid());
         this.cursoListPorId = CursoDtoParaRelacionamento.converter(pessoa.getCursoPorId());
         this.cursoListPorUuid = CursoDtoParaRelacionamento.converter(pessoa.getCursoPorUuid());
         this.produtoListComJoinTable = ProdutoDtoParaRelacionamento.converter(pessoa.getProdutoListComJoinTable());
