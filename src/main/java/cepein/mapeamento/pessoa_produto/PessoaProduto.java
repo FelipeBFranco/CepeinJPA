@@ -1,23 +1,30 @@
 package cepein.mapeamento.pessoa_produto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.produto.model.Produto;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
-
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
-public class PessoaProduto implements  Serializable{
+@Entity
 
-    @Id
-    @Column(name = "id_pessoa_fk")
-    private Long idPessoa;
+@Table(name = "pessoa_produto")
+public class PessoaProduto {
 
-    @Id
-    @Column(name = "id_produto_fk")
-    private Long idProduto;
+    @EmbeddedId
+    private PessoaProdutoId pessoaProdutoId;
+
+  /*  @MapsId("idPessoa")
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa_fk")
+    private Pessoa pessoa;*/
+
+    @MapsId("idProduto")
+    @ManyToOne
+    @JoinColumn(name = "id_produto_fk")
+    private Produto produto;
 }

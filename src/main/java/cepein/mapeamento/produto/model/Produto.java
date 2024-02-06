@@ -1,6 +1,7 @@
 package cepein.mapeamento.produto.model;
 
 import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,9 @@ public class Produto {
 
     private String descricao;
 
-    @ManyToMany(mappedBy = "produtoListComJoinTable")
-    private List<Pessoa> pessoaListComJoinTable;
+    //@ManyToMany(mappedBy = "produtoListComJoinTable")
+    //private List<Pessoa> pessoaListComJoinTable;
+
+    @OneToMany(mappedBy = "produto")
+    private List<PessoaProduto> pessoaProdutoList;
 }
