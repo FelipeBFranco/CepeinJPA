@@ -1,10 +1,13 @@
 package cepein.mapeamento.pedido.model;
 
+import cepein.mapeamento.pessoa.model.Pessoa;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,4 +24,7 @@ public class Pedido {
     private String descricao;
 
     private String uuid;
+
+    @ManyToMany(mappedBy = "pedidoListComJoinTable")
+    private List<Pessoa> pessoaListComJoinTable;
 }

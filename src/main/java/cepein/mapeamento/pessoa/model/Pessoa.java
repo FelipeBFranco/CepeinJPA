@@ -2,6 +2,8 @@ package cepein.mapeamento.pessoa.model;
 
 import cepein.mapeamento.curso.model.Curso;
 import cepein.mapeamento.endereco.model.Endereco;
+import cepein.mapeamento.pedido.model.Pedido;
+import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -49,4 +51,13 @@ public class Pessoa {
             inverseJoinColumns=
             @JoinColumn(name="id_produto_fk", referencedColumnName="id"))
     private List<Produto> produtoListComJoinTable;
+    @ManyToMany
+    @JoinTable(name="pessoa_pedido",
+            joinColumns=
+            @JoinColumn(name="uuid_pessoa_fk", referencedColumnName="uuid"),
+            inverseJoinColumns=
+            @JoinColumn(name="uuid_pedido_fk", referencedColumnName="uuid"))
+    private List<Pedido> pedidoListComJoinTable;
+
+
 }

@@ -1,6 +1,7 @@
 package cepein.mapeamento.pedido.dto;
 
 import cepein.mapeamento.pedido.model.Pedido;
+import cepein.mapeamento.pessoa.dto.PessoaDtoParaRelacionamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,9 +18,11 @@ public class PedidoDto {
 
     private String uuid;
 
+    private List<PessoaDtoParaRelacionamento> pessoaListComJoinTable;
+
     public static List<PedidoDto> converter(List<Pedido> pedidoList){
         return pedidoList.stream()
-                .map(pedido -> new PedidoDto(pedido.getId(), pedido.getDescricao(), pedido.getUuid()))
+                .map(pedido -> new PedidoDto(pedido.getId(), pedido.getDescricao(), pedido.getUuid(),PessoaDtoParaRelacionamento.convet(pedido.getPessoaListComJoinTable())))
                 .collect(Collectors.toList());
     }
 }
