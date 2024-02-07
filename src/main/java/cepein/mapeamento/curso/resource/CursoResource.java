@@ -27,7 +27,7 @@ public class CursoResource {
         return this.cursoService.listarCursos();
     }
 
-    @GetMapping("listar-por-id/{idCurso}")
+    @GetMapping("procurar-por-id/{idCurso}")
     public ResponseEntity<CursoDto> listarCursoPorId(@PathVariable Long idCurso){
         return this.cursoService.procurarCurso(idCurso);
     }
