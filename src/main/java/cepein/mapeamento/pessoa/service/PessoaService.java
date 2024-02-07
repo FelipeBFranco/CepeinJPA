@@ -24,7 +24,7 @@ public class PessoaService {
 
     public Pessoa buscarPessoa(Long idPessoa){
         return this.pessoaRepository.findById(idPessoa)
-                .orElseThrow(()-> new ObjectNotFoundException("Pessoa não encontrada"))
+                .orElseThrow(()-> new ObjectNotFoundException("Pessoa não encontrada"));
     }
 
     public ResponseEntity<List<PessoaDto>> listarPessoas(){
