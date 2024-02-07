@@ -4,9 +4,7 @@ import cepein.mapeamento.pedido.dto.PedidoDto;
 import cepein.mapeamento.pedido.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +22,13 @@ public class PedidoResource {
     public ResponseEntity<List<PedidoDto>> listarPedidos(){
         return this.pedidoService.listarPedidos();
     }
+    @GetMapping("procurar-por-id/{idPedido}")
+    public ResponseEntity<PedidoDto> procurarPedido(@PathVariable Long idPedido){
+        return this.pedidoService.procurarPedido(idPedido);
+    }
+    @DeleteMapping("/deletar/{idPedido}")
+    public ResponseEntity<Void> deletarPedido(@PathVariable Long idPedido){
+        return this.pedidoService.deletarPedido(idPedido);
+    }
+
 }
