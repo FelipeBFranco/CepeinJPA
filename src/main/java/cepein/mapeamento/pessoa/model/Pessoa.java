@@ -44,13 +44,13 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoaPorUuid")
     private List<Curso> cursoPorUuid;
 
-    /*@ManyToMany
+    @ManyToMany
     @JoinTable(name="pessoa_produto",
             joinColumns=
             @JoinColumn(name="id_pessoa_fk", referencedColumnName="id_pessoa"),
             inverseJoinColumns=
             @JoinColumn(name="id_produto_fk", referencedColumnName="id"))
-    private List<Produto> produtoListComJoinTable;*/
+    private List<Produto> produtoListComJoinTable;
     @ManyToMany
     @JoinTable(name="pessoa_pedido",
             joinColumns=
@@ -59,5 +59,7 @@ public class Pessoa {
             @JoinColumn(name="uuid_pedido_fk", referencedColumnName="uuid"))
     private List<Pedido> pedidoListComJoinTable;
 
+    @OneToMany(mappedBy = "pessoa")
+    private List<PessoaProduto> pessoaProdutoList;
 
 }

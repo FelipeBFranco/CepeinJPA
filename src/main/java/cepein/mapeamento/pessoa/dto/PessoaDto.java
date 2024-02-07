@@ -32,9 +32,12 @@ public class PessoaDto {
     private List<CursoDtoParaRelacionamento> cursoListPorId;
     private List<CursoDtoParaRelacionamento> cursoListPorUuid;
 
-    //private List<ProdutoDtoParaRelacionamento> produtoListComJoinTable;
+    private List<ProdutoDtoParaRelacionamento> produtoListComJoinTable;
+    private List<ProdutoDtoParaRelacionamento> produtoListComEmbeddable;
 
     private List<PedidoDtoParaRelacionamento> pedidoListComJoinTable;
+
+
 
     public PessoaDto (Pessoa pessoa){
         this.id = pessoa.getId_pessoa();
@@ -44,7 +47,8 @@ public class PessoaDto {
         this.enderecoPorUuid = new EnderecoDtoParaRelacionamento( pessoa.getEnderecoPorUuid());
         this.cursoListPorId = CursoDtoParaRelacionamento.converter(pessoa.getCursoPorId());
         this.cursoListPorUuid = CursoDtoParaRelacionamento.converter(pessoa.getCursoPorUuid());
-        //this.produtoListComJoinTable = ProdutoDtoParaRelacionamento.converter(pessoa.getProdutoListComJoinTable());
+        this.produtoListComJoinTable = ProdutoDtoParaRelacionamento.converter(pessoa.getProdutoListComJoinTable());
+        this.produtoListComEmbeddable =ProdutoDtoParaRelacionamento.converterPessoaProduto(pessoa.getPessoaProdutoList());
         this.pedidoListComJoinTable = PedidoDtoParaRelacionamento.converter(pessoa.getPedidoListComJoinTable());
 
     }

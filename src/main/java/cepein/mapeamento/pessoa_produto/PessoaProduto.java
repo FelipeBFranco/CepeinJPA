@@ -18,10 +18,10 @@ public class PessoaProduto {
     @EmbeddedId
     private PessoaProdutoId pessoaProdutoId;
 
-  /*  @MapsId("idPessoa")
+    @MapsId("idPessoa")
     @ManyToOne
     @JoinColumn(name = "id_pessoa_fk")
-    private Pessoa pessoa;*/
+    private Pessoa pessoa;
 
     @MapsId("idProduto")
     @ManyToOne

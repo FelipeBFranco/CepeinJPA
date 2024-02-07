@@ -2,10 +2,12 @@ package cepein.mapeamento.pessoa.dto;
 
 
 import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
@@ -24,8 +26,24 @@ public class PessoaDtoParaRelacionamento {
         this.uuid = pessoa.getUuid();
 
     }
-    public static List<PessoaDtoParaRelacionamento> convet(List<Pessoa> pessoaList){
+    public PessoaDtoParaRelacionamento(PessoaProduto pessoaProduto){
+        this.id = pessoaProduto.getPessoa().getId_pessoa();
+        this.nome = pessoaProduto.getPessoa().getNome();
+        this.uuid = pessoaProduto.getPessoa().getUuid();
+
+    }
+
+
+
+
+    public static List<PessoaDtoParaRelacionamento> converter(List<Pessoa> pessoaList){
         return pessoaList.stream()
+                .map(PessoaDtoParaRelacionamento::new)
+                .collect(Collectors.toList());
+    }
+
+    public static List<PessoaDtoParaRelacionamento> converterPessoaProduto(List<PessoaProduto> pessoaProdutoList){
+        return pessoaProdutoList.stream()
                 .map(PessoaDtoParaRelacionamento::new)
                 .collect(Collectors.toList());
     }

@@ -23,8 +23,8 @@ public class Produto {
 
     private String descricao;
 
-    //@ManyToMany(mappedBy = "produtoListComJoinTable")
-    //private List<Pessoa> pessoaListComJoinTable;
+    @ManyToMany(mappedBy = "produtoListComJoinTable")
+    private List<Pessoa> pessoaListComJoinTable;
 
     @OneToMany(mappedBy = "produto")
     private List<PessoaProduto> pessoaProdutoList;

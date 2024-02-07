@@ -22,7 +22,7 @@ public class PedidoDto {
 
     public static List<PedidoDto> converter(List<Pedido> pedidoList){
         return pedidoList.stream()
-                .map(pedido -> new PedidoDto(pedido.getId(), pedido.getDescricao(), pedido.getUuid(),PessoaDtoParaRelacionamento.convet(pedido.getPessoaListComJoinTable())))
+                .map(pedido -> new PedidoDto(pedido.getId(), pedido.getDescricao(), pedido.getUuid(),PessoaDtoParaRelacionamento.converter(pedido.getPessoaListComJoinTable())))
                 .collect(Collectors.toList());
     }
 }
