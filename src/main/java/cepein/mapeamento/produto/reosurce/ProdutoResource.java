@@ -4,9 +4,7 @@ import cepein.mapeamento.produto.dto.ProdutoDto;
 import cepein.mapeamento.produto.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,13 @@ public class ProdutoResource {
     @GetMapping("/listar")
     public ResponseEntity<List<ProdutoDto>> listarProdutos(){
         return this.produtoService.listarProdutos();
+    }
+    @GetMapping("procurar-por-id/{idProduto}")
+    public ResponseEntity<ProdutoDto> procurarProduto(@PathVariable Long idProduto){
+        return this.produtoService.procurarProduto(idProduto);
+    }
+    @DeleteMapping("/deletar/{idProduto}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable Long idProduto){
+        return this.produtoService.deletarProduto(idProduto);
     }
 }
