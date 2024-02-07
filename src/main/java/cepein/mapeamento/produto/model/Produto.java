@@ -27,5 +27,5 @@ public class Produto {
     private List<Pessoa> pessoaListComJoinTable;
 
     @OneToMany(mappedBy = "produto")
-    private List<PessoaProduto> pessoaProdutoList;
+    private List<PessoaProduto> pessoaListComEmbeddable;
 }

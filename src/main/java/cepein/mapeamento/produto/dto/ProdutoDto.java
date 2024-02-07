@@ -23,7 +23,7 @@ public class ProdutoDto {
         return produtoList.stream()
                 .map(produto -> new ProdutoDto(produto.getId(), produto.getDescricao(),
                         PessoaDtoParaRelacionamento.converter(produto.getPessoaListComJoinTable()),
-                        PessoaDtoParaRelacionamento.converterPessoaProduto(produto.getPessoaProdutoList())))
+                        PessoaDtoParaRelacionamento.converterPessoaProduto(produto.getPessoaListComEmbeddable())))
                 .collect(Collectors.toList());
     }
 }
