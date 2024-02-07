@@ -36,7 +36,7 @@ public class PessoaDto {
     private List<ProdutoDtoParaRelacionamento> produtoListComEmbeddable;
 
     private List<PedidoDtoParaRelacionamento> pedidoListComJoinTable;
-    private List<PedidoDtoParaRelacionamento> pedidoListComEmbeddable;
+     List<PedidoDtoParaRelacionamento> pedidoListComEmbeddable;
 
 
 

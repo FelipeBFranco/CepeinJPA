@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
 public class PedidoDtoParaRelacionamento {
+
     private Long id;
 
     private String descricao;

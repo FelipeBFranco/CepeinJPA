@@ -21,11 +21,11 @@ public class PessoaPedido {
 
     @MapsId("UuidPessoa")
     @ManyToOne
-    @JoinColumn(name = "uuid_pessoa_fk")
+    @JoinColumn(name = "uuid_pessoa_fk",referencedColumnName = "uuid")
     private Pessoa pessoa;
 
     @MapsId("UuidPedido")
     @ManyToOne
-    @JoinColumn(name = "uuid_pedido_fk")
+    @JoinColumn(name = "uuid_pedido_fk",referencedColumnName = "uuid")
     private Pedido pedido;
 }
