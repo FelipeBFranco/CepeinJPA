@@ -3,6 +3,7 @@ package cepein.mapeamento.pessoa.model;
 import cepein.mapeamento.curso.model.Curso;
 import cepein.mapeamento.endereco.model.Endereco;
 import cepein.mapeamento.pedido.model.Pedido;
+import cepein.mapeamento.pessoa_pedido.PessoaPedido;
 import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
@@ -51,6 +52,11 @@ public class Pessoa {
             inverseJoinColumns=
             @JoinColumn(name="id_produto_fk", referencedColumnName="id"))
     private List<Produto> produtoListComJoinTable;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<PessoaProduto> produtoListComEmbeddable;
+
+
     @ManyToMany
     @JoinTable(name="pessoa_pedido",
             joinColumns=
@@ -60,6 +66,7 @@ public class Pessoa {
     private List<Pedido> pedidoListComJoinTable;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<PessoaProduto> pessoaProdutoList;
+    private List<PessoaPedido> pedidoListComEmbeddable;
+
 
 }

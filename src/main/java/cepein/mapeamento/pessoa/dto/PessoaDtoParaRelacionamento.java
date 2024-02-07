@@ -2,6 +2,7 @@ package cepein.mapeamento.pessoa.dto;
 
 
 import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.pessoa_pedido.PessoaPedido;
 import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,11 @@ public class PessoaDtoParaRelacionamento {
 
     }
 
-
+    public PessoaDtoParaRelacionamento(PessoaPedido pessoaPedido) {
+        this.id = pessoaPedido.getPessoa().getId_pessoa();
+        this.nome = pessoaPedido.getPessoa().getNome();
+        this.uuid = pessoaPedido.getPessoa().getUuid();
+    }
 
 
     public static List<PessoaDtoParaRelacionamento> converter(List<Pessoa> pessoaList){
@@ -44,6 +49,11 @@ public class PessoaDtoParaRelacionamento {
 
     public static List<PessoaDtoParaRelacionamento> converterPessoaProduto(List<PessoaProduto> pessoaProdutoList){
         return pessoaProdutoList.stream()
+                .map(PessoaDtoParaRelacionamento::new)
+                .collect(Collectors.toList());
+    }
+    public static List<PessoaDtoParaRelacionamento> converterPessoaPedido(List<PessoaPedido> pessoaPedidoList){
+        return pessoaPedidoList.stream()
                 .map(PessoaDtoParaRelacionamento::new)
                 .collect(Collectors.toList());
     }

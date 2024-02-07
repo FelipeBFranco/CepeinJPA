@@ -1,6 +1,7 @@
 package cepein.mapeamento.pedido.model;
 
 import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.pessoa_pedido.PessoaPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +28,7 @@ public class Pedido {
 
     @ManyToMany(mappedBy = "pedidoListComJoinTable")
     private List<Pessoa> pessoaListComJoinTable;
+
+    @OneToMany(mappedBy = "pedido")
+    private List<PessoaPedido> pessoaListComEmbeddable;
 }

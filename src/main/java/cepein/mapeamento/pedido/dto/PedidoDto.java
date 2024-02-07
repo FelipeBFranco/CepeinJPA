@@ -19,10 +19,15 @@ public class PedidoDto {
     private String uuid;
 
     private List<PessoaDtoParaRelacionamento> pessoaListComJoinTable;
+    private List<PessoaDtoParaRelacionamento> pessoaListComEmbeddable;
 
     public static List<PedidoDto> converter(List<Pedido> pedidoList){
         return pedidoList.stream()
-                .map(pedido -> new PedidoDto(pedido.getId(), pedido.getDescricao(), pedido.getUuid(),PessoaDtoParaRelacionamento.converter(pedido.getPessoaListComJoinTable())))
+                .map(pedido -> new PedidoDto(pedido.getId(),
+                        pedido.getDescricao(),
+                        pedido.getUuid(),
+                        PessoaDtoParaRelacionamento.converter(pedido.getPessoaListComJoinTable()),
+                        PessoaDtoParaRelacionamento.converterPessoaPedido(pedido.getPessoaListComEmbeddable())))
                 .collect(Collectors.toList());
     }
 }

@@ -11,7 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 @Table(name = "pessoa_produto")
 public class PessoaProduto {
 
