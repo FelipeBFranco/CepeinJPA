@@ -54,7 +54,7 @@ public class PessoaDto {
         this.pedidoListComEmbeddable = PedidoDtoParaRelacionamento.converterPessoaPedido(pessoa.getPedidoListComEmbeddable());
 
     }
-    public static List<PessoaDto> convet(List<Pessoa> pessoaList){
+    public static List<PessoaDto> converter(List<Pessoa> pessoaList){
         return pessoaList.stream()
                 .map(PessoaDto::new)
                 .collect(Collectors.toList());

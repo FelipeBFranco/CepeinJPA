@@ -13,7 +13,7 @@ public class EnderecoForms {
     @Size(max = 250, message = "O campo 'descriçao' pode ter no máximo {MAX} caracteres!")
     private String uuid;
 
-    public Endereco convet(Endereco endereco){
+    public Endereco converter(Endereco endereco){
         endereco.setUuid(this.getUuid());
         return endereco;
     }

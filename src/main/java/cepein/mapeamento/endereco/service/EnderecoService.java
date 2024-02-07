@@ -28,7 +28,7 @@ public class EnderecoService {
 
     public ResponseEntity<List<EnderecoDto>> listarEnderecos(){
         List<Endereco> enderecoList = this.enderecoRepository.findAll();
-        List<EnderecoDto> enderecoDtoList = EnderecoDto.convet(enderecoList);
+        List<EnderecoDto> enderecoDtoList = EnderecoDto.converter(enderecoList);
         return ResponseEntity.ok(enderecoDtoList);
     }
 
@@ -40,7 +40,7 @@ public class EnderecoService {
 
     @Transactional
     public ResponseEntity<Void> cadastrarEndereco(EnderecoForms enderecoForms){
-        Endereco endereco = enderecoForms.convet(new Endereco());
+        Endereco endereco = enderecoForms.converter(new Endereco());
         this.enderecoRepository.save(endereco);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -48,7 +48,7 @@ public class EnderecoService {
     @Transactional
     public ResponseEntity<Void> alterarEndereco(Long idEndereco,EnderecoForms enderecoForms){
         Endereco endereco = this.buscarEndereco(idEndereco);
-        Endereco enderecoAlterado = enderecoForms.convet(endereco);
+        Endereco enderecoAlterado = enderecoForms.converter(endereco);
         this.enderecoRepository.save(enderecoAlterado);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

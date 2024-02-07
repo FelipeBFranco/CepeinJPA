@@ -26,7 +26,7 @@ public class EnderecoDto {
         this.pessoaListPorId = new PessoaDtoParaRelacionamento(endereco.getPessoaPorId());
         this.pessoaListPorUuid = new PessoaDtoParaRelacionamento(endereco.getPessoaPorUuid());
     }
-    public static List<EnderecoDto> convet(List<Endereco> enderecoList){
+    public static List<EnderecoDto> converter(List<Endereco> enderecoList){
         return enderecoList.stream()
                 .map(EnderecoDto::new)
                 .collect(Collectors.toList());

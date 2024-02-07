@@ -52,7 +52,7 @@ public class CursoService {
     @Transactional
     public ResponseEntity<Void> cadastrarCurso(CursoForms cursoForms){
         Pessoa pessoa = this.buscarPessoa(cursoForms.getPessoaId());
-        Curso curso = cursoForms.convet(new Curso(), pessoa);
+        Curso curso = cursoForms.converter(new Curso(), pessoa);
         this.cursoRepository.save(curso);
 
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -63,7 +63,7 @@ public class CursoService {
         Curso curso = this.buscarCurso(cursoId);
         Pessoa pessoa = this.buscarPessoa(cursoForms.getPessoaId());
 
-        Curso cursoAlterado = cursoForms.convet(curso, pessoa);
+        Curso cursoAlterado = cursoForms.converter(curso, pessoa);
         this.cursoRepository.save(cursoAlterado);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

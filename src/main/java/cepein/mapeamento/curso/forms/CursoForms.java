@@ -21,7 +21,7 @@ public class CursoForms {
     @Size(max = 128, message = "O campo 'pessoaUuid' pode ter no máximo {MAX} caracteres!")
     private String pessoaUuuid;
 
-    public Curso convet(Curso curso, Pessoa pessoa){
+    public Curso converter(Curso curso, Pessoa pessoa){
         curso.setDescricao(this.descricao);
         curso.setPessoaPorId(pessoa);
         curso.setPessoaPorUuid(pessoa);

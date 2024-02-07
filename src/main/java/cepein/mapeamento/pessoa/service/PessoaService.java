@@ -18,7 +18,7 @@ public class PessoaService {
     }
     public ResponseEntity<List<PessoaDto>> listarPessoas(){
         List<Pessoa> pessoaList = this.pessoaRepository.findAll();
-        List<PessoaDto> pessoaDtoList = PessoaDto.convet(pessoaList);
+        List<PessoaDto> pessoaDtoList = PessoaDto.converter(pessoaList);
         return ResponseEntity.ok(pessoaDtoList);
     }
 }
