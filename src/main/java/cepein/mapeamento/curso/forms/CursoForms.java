@@ -1,7 +1,6 @@
 package cepein.mapeamento.curso.forms;
 
 import cepein.mapeamento.curso.model.Curso;
-import cepein.mapeamento.endereco.model.Endereco;
 import cepein.mapeamento.pessoa.model.Pessoa;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

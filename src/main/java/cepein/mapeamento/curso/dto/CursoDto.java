@@ -19,7 +19,7 @@ public class CursoDto {
 
     private PessoaDtoParaRelacionamento pessoaPorUuid;
     public CursoDto(Curso curso){
-        this.id = curso.getId_curso();
+        this.id = curso.getId();
         this.descricao = curso.getDescricao();
         this.pessoaPorId = new PessoaDtoParaRelacionamento(curso.getPessoaPorId());
         this.pessoaPorUuid = new PessoaDtoParaRelacionamento(curso.getPessoaPorUuid());

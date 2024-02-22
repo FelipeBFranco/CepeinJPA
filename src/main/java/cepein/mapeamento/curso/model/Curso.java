@@ -14,9 +14,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "curso")
 public class Curso {
+
     @Id
+    @Column(name = "id_curso")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_curso;
+    private Long id;
 
     private String descricao;
 

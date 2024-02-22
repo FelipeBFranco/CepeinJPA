@@ -3,10 +3,7 @@ package cepein.mapeamento.pedido.model;
 import cepein.mapeamento.pessoa.model.Pessoa;
 import cepein.mapeamento.pessoa_pedido.PessoaPedido;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,10 +12,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "pedido")
 public class Pedido {
 
     @Id
+    @Column(name = "id_pedido")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

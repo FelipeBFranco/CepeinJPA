@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
@@ -22,20 +21,20 @@ public class PessoaDtoParaRelacionamento {
 
 
     public PessoaDtoParaRelacionamento(Pessoa pessoa){
-        this.id = pessoa.getId_pessoa();
+        this.id = pessoa.getId();
         this.nome = pessoa.getNome();
         this.uuid = pessoa.getUuid();
 
     }
     public PessoaDtoParaRelacionamento(PessoaProduto pessoaProduto){
-        this.id = pessoaProduto.getPessoa().getId_pessoa();
+        this.id = pessoaProduto.getPessoa().getId();
         this.nome = pessoaProduto.getPessoa().getNome();
         this.uuid = pessoaProduto.getPessoa().getUuid();
 
     }
 
     public PessoaDtoParaRelacionamento(PessoaPedido pessoaPedido) {
-        this.id = pessoaPedido.getPessoa().getId_pessoa();
+        this.id = pessoaPedido.getPessoa().getId();
         this.nome = pessoaPedido.getPessoa().getNome();
         this.uuid = pessoaPedido.getPessoa().getUuid();
     }

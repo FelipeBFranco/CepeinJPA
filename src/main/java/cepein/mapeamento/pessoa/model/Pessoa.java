@@ -7,10 +7,8 @@ import cepein.mapeamento.pessoa_pedido.PessoaPedido;
 import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -24,25 +22,32 @@ import java.util.List;
 public class Pessoa {
 
     @Id
+    @Column(name = "id_pessoa")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pessoa;
+    private Long id;
 
     private String nome;
 
     private String uuid;
 
     @OneToOne
-    @JoinColumn(name = "id_endereco_fk", referencedColumnName = "idEndereco")
+    @JoinColumn(name = "id_endereco_fk", referencedColumnName = "id_endereco")
     private Endereco enderecoPorId;
+
+    @Column(name = "id_endereco_fk", updatable = false, insertable = false)
+    private Long enderecoID;
 
     @OneToOne
     @JoinColumn(name = "uuid_endereco_fk", referencedColumnName = "uuid")
     private Endereco enderecoPorUuid;
 
-    @OneToMany(mappedBy = "pessoaPorId")
+    @Column(name = "uuid_endereco_fk", insertable = false, updatable = false)
+    private String enderecoUuid;
+
+    @OneToMany(mappedBy = "pessoaPorId", cascade = CascadeType.ALL)
     private List<Curso> cursoPorId;
 
-    @OneToMany(mappedBy = "pessoaPorUuid")
+    @OneToMany(mappedBy = "pessoaPorUuid", cascade = CascadeType.ALL)
     private List<Curso> cursoPorUuid;
 
     @ManyToMany
@@ -50,7 +55,7 @@ public class Pessoa {
             joinColumns=
             @JoinColumn(name="id_pessoa_fk", referencedColumnName="id_pessoa"),
             inverseJoinColumns=
-            @JoinColumn(name="id_produto_fk", referencedColumnName="id"))
+            @JoinColumn(name="id_produto_fk", referencedColumnName="id_produto"))
     private List<Produto> produtoListComJoinTable;
 
     @OneToMany(mappedBy = "pessoa")

@@ -1,6 +1,5 @@
 package cepein.mapeamento.produto.dto;
 
-import cepein.mapeamento.pessoa.dto.PessoaDtoParaRelacionamento;
 import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import cepein.mapeamento.produto.model.Produto;
 import lombok.AllArgsConstructor;
@@ -16,8 +15,6 @@ public class ProdutoDtoParaRelacionamento {
     private Long id;
 
     private String Descricao;
-
-
 
     public static List<ProdutoDtoParaRelacionamento> converter(List<Produto> produtoList){
         return produtoList.stream()

@@ -41,7 +41,7 @@ public class PessoaDto {
 
 
     public PessoaDto (Pessoa pessoa){
-        this.id = pessoa.getId_pessoa();
+        this.id = pessoa.getId();
         this.nome = pessoa.getNome();
         this.uuid = pessoa.getUuid();
         this.enderecoPorId = new EnderecoDtoParaRelacionamento( pessoa.getEnderecoPorId());

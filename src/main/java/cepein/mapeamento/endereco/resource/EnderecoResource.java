@@ -22,6 +22,7 @@ public class EnderecoResource {
     public ResponseEntity<List<EnderecoDto>> listarEnderecos(){
         return this.enderecoService.listarEnderecos();
     }
+
     @GetMapping("procurar-por-id/{idEndereco}")
     public ResponseEntity<EnderecoDto> listarEnderecoPorId(@PathVariable Long idEndereco){
         return this.enderecoService.procurarEndereco(idEndereco);

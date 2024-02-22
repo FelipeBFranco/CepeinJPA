@@ -17,7 +17,7 @@ public class CursoDtoParaRelacionamento {
 
     public static List<CursoDtoParaRelacionamento> converter(List<Curso> cursos){
         return cursos.stream()
-                .map(curso -> new CursoDtoParaRelacionamento(curso.getId_curso(), curso.getDescricao()))
+                .map(curso -> new CursoDtoParaRelacionamento(curso.getId(), curso.getDescricao()))
                 .collect(Collectors.toList());
     }
 }

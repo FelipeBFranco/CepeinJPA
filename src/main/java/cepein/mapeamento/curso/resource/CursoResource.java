@@ -27,20 +27,20 @@ public class CursoResource {
         return this.cursoService.listarCursos();
     }
 
-    @GetMapping("procurar-por-id/{idCurso}")
+    @GetMapping("/procurar-por-id/{idCurso}")
     public ResponseEntity<CursoDto> listarCursoPorId(@PathVariable Long idCurso){
         return this.cursoService.procurarCurso(idCurso);
     }
-    @PostMapping("cadastrar-curso")
+    @PostMapping("/cadastrar-curso")
     public ResponseEntity<Void> cadastraEndereco(@RequestBody CursoForms cursoForms){
         return this.cursoService.cadastrarCurso(cursoForms);
     }
-    @PutMapping ("alterar-curso/{idCurso}")
+    @PutMapping ("/alterar-curso/{idCurso}")
     public ResponseEntity<Void> alterarCurso(@PathVariable Long idCurso,@RequestBody CursoForms cursoForms){
         return this.cursoService.alterarCurso(idCurso,cursoForms);
     }
 
-    @DeleteMapping("deletar-curso/{idCurso}")
+    @DeleteMapping("/deletar-curso/{idCurso}")
     public ResponseEntity<Void> deleterCurso(@PathVariable Long idCurso){
         return this.cursoService.deletarCurso(idCurso);
     }
