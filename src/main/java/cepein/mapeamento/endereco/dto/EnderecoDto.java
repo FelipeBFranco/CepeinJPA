@@ -26,8 +26,8 @@ public class EnderecoDto {
 
     private String estado;
 
-    private PessoaDtoParaRelacionamento pessoaListPorId;
-    private PessoaDtoParaRelacionamento pessoaListPorUuid;
+    private PessoaDtoParaRelacionamento pessoaPorId;
+    private PessoaDtoParaRelacionamento pessoaPorUuid;
 
     public EnderecoDto(Endereco endereco){
         this.idEndereco = endereco.getId_endereco();
@@ -36,8 +36,8 @@ public class EnderecoDto {
         this.cep = endereco.getCep();
         this.cidade = endereco.getCidade();
         this.estado = endereco.getEstado();
-        this.pessoaListPorId = new PessoaDtoParaRelacionamento(endereco.getPessoaPorId());
-        this.pessoaListPorUuid = new PessoaDtoParaRelacionamento(endereco.getPessoaPorUuid());
+        this.pessoaPorId = new PessoaDtoParaRelacionamento(endereco.getPessoaPorId());
+        this.pessoaPorUuid = new PessoaDtoParaRelacionamento(endereco.getPessoaPorUuid());
     }
     public static List<EnderecoDto> converter(List<Endereco> enderecoList){
         return enderecoList.stream()
