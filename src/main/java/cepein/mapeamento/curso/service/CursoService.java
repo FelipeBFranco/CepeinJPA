@@ -34,43 +34,43 @@ public class CursoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Curso não encontrado"));
     }
 
-    public ResponseEntity<List<CursoDto>> listarCursos(){
+    public List<CursoDto> listarCursos(){
         List<Curso> cursoList = this.cursoRepository.findAll();
         List<CursoDto> cursoDtoList = CursoDto.converter(cursoList);
 
-        return ResponseEntity.ok(cursoDtoList);
+        return cursoDtoList;
     }
 
-    public ResponseEntity<CursoDto> procurarCurso(Long idCurso){
+    public CursoDto procurarCurso(Long idCurso){
         Curso curso = this.buscarCurso(idCurso);
         CursoDto cursoDto = new CursoDto(curso);
 
-        return ResponseEntity.ok(cursoDto);
+        return cursoDto;
     }
 
     @Transactional
-    public ResponseEntity<Void> cadastrarCurso(CursoForms cursoForms){
+    public Void cadastrarCurso(CursoForms cursoForms){
         Pessoa pessoa = this.pessoaService.buscarPessoa(cursoForms.getPessoaId());
         Curso curso = cursoForms.converter(new Curso(), pessoa);
         this.cursoRepository.save(curso);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return null;
     }
 
     @Transactional
-    public ResponseEntity<Void> alterarCurso(Long cursoId, CursoForms cursoForms){
+    public Void alterarCurso(Long cursoId, CursoForms cursoForms){
         Curso curso = this.buscarCurso(cursoId);
         Pessoa pessoa = this.pessoaService.buscarPessoa(cursoForms.getPessoaId());
 
         Curso cursoAlterado = cursoForms.converter(curso, pessoa);
         this.cursoRepository.save(cursoAlterado);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return null;
     }
 
     @Transactional
-    public ResponseEntity<Void> deletarCurso(Long idCurso){
+    public Void deletarCurso(Long idCurso){
         this.cursoRepository.deleteById(idCurso);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return null;
     }
 }
