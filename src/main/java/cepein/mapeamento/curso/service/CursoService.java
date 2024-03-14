@@ -4,8 +4,10 @@ import cepein.mapeamento.curso.dto.CursoDto;
 import cepein.mapeamento.curso.forms.CursoForms;
 import cepein.mapeamento.curso.model.Curso;
 import cepein.mapeamento.curso.repository.CursoRepository;
+import cepein.mapeamento.pedido.service.PedidoService;
 import cepein.mapeamento.pessoa.model.Pessoa;
 import cepein.mapeamento.pessoa.repository.PessoaRepository;
+import cepein.mapeamento.pessoa.service.PessoaService;
 import exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +20,15 @@ import java.util.List;
 @Service
 public class CursoService {
     private final CursoRepository cursoRepository;
-    private final PessoaRepository pessoaRepository;
+
+    private final PessoaService pessoaService;
 
     @Autowired
-    public CursoService(CursoRepository cursoRepository, PessoaRepository pessoaRepository){
+    public CursoService(CursoRepository cursoRepository,PessoaService pessoaService){
         this.cursoRepository = cursoRepository;
-        this.pessoaRepository = pessoaRepository;
+        this.pessoaService = pessoaService;
     }
 
-    private Pessoa buscarPessoa(Long idPessoa){
-        return this.pessoaRepository.findById(idPessoa)
-                .orElseThrow(() -> new ObjectNotFoundException("Pessoa não encontrado"));
-    }
     private Curso buscarCurso(Long idCurso){
         return this.cursoRepository.findById(idCurso)
                 .orElseThrow(() -> new ObjectNotFoundException("Curso não encontrado"));
@@ -51,7 +50,7 @@ public class CursoService {
 
     @Transactional
     public ResponseEntity<Void> cadastrarCurso(CursoForms cursoForms){
-        Pessoa pessoa = this.buscarPessoa(cursoForms.getPessoaId());
+        Pessoa pessoa = this.pessoaService.buscarPessoa(cursoForms.getPessoaId());
         Curso curso = cursoForms.converter(new Curso(), pessoa);
         this.cursoRepository.save(curso);
 
@@ -61,7 +60,7 @@ public class CursoService {
     @Transactional
     public ResponseEntity<Void> alterarCurso(Long cursoId, CursoForms cursoForms){
         Curso curso = this.buscarCurso(cursoId);
-        Pessoa pessoa = this.buscarPessoa(cursoForms.getPessoaId());
+        Pessoa pessoa = this.pessoaService.buscarPessoa(cursoForms.getPessoaId());
 
         Curso cursoAlterado = cursoForms.converter(curso, pessoa);
         this.cursoRepository.save(cursoAlterado);
