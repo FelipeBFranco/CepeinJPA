@@ -6,6 +6,7 @@ import cepein.mapeamento.curso.service.CursoService;
 import cepein.mapeamento.endereco.dto.EnderecoDto;
 import cepein.mapeamento.endereco.forms.EnderecoForms;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,24 +25,28 @@ public class CursoResource {
 
     @GetMapping("/listar")
     public ResponseEntity<List<CursoDto>> listarCursos(){
-        return this.cursoService.listarCursos();
+        return ResponseEntity.ok(this.cursoService.listarCursos());
     }
 
     @GetMapping("/procurar-por-id/{idCurso}")
     public ResponseEntity<CursoDto> listarCursoPorId(@PathVariable Long idCurso){
-        return this.cursoService.procurarCurso(idCurso);
+        return ResponseEntity.ok(this.cursoService.procurarCurso(idCurso));
     }
     @PostMapping("/cadastrar-curso")
-    public ResponseEntity<Void> cadastraEndereco(@RequestBody CursoForms cursoForms){
-        return this.cursoService.cadastrarCurso(cursoForms);
+    public ResponseEntity<HttpStatus> cadastraEndereco(@RequestBody CursoForms cursoForms){
+        this.cursoService.cadastrarCurso(cursoForms);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
     @PutMapping ("/alterar-curso/{idCurso}")
-    public ResponseEntity<Void> alterarCurso(@PathVariable Long idCurso,@RequestBody CursoForms cursoForms){
-        return this.cursoService.alterarCurso(idCurso,cursoForms);
+    public ResponseEntity<HttpStatus> alterarCurso(@PathVariable Long idCurso,@RequestBody CursoForms cursoForms){
+        this.cursoService.alterarCurso(idCurso,cursoForms);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/deletar-curso/{idCurso}")
-    public ResponseEntity<Void> deleterCurso(@PathVariable Long idCurso){
-        return this.cursoService.deletarCurso(idCurso);
+    public ResponseEntity<HttpStatus> deleterCurso(@PathVariable Long idCurso){
+        this.cursoService.deletarCurso(idCurso);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
