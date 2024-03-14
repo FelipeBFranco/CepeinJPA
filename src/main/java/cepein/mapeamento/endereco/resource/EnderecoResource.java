@@ -4,6 +4,7 @@ import cepein.mapeamento.endereco.dto.EnderecoDto;
 import cepein.mapeamento.endereco.forms.EnderecoForms;
 import cepein.mapeamento.endereco.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,24 +21,27 @@ public class EnderecoResource {
 
     @GetMapping("listar")
     public ResponseEntity<List<EnderecoDto>> listarEnderecos(){
-        return this.enderecoService.listarEnderecos();
+        return ResponseEntity.ok(this.enderecoService.listarEnderecos());
     }
 
     @GetMapping("procurar-por-id/{idEndereco}")
     public ResponseEntity<EnderecoDto> listarEnderecoPorId(@PathVariable Long idEndereco){
-        return this.enderecoService.procurarEndereco(idEndereco);
+        return ResponseEntity.ok(this.enderecoService.procurarEndereco(idEndereco));
     }
     @PostMapping("cadastrar-endereco")
-    public ResponseEntity<Void> cadastraEndereco(@RequestBody EnderecoForms enderecoForms){
-        return this.enderecoService.cadastrarEndereco(enderecoForms);
+    public ResponseEntity<HttpStatus> cadastraEndereco(@RequestBody EnderecoForms enderecoForms){
+        this.enderecoService.cadastrarEndereco(enderecoForms);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PutMapping ("alterar-endereco/{idEndereco}")
-    public ResponseEntity<Void> alterarEndereco(@PathVariable Long idEndereco,@RequestBody EnderecoForms enderecoForms){
-        return this.enderecoService.alterarEndereco(idEndereco,enderecoForms);
+    public ResponseEntity<HttpStatus> alterarEndereco(@PathVariable Long idEndereco,@RequestBody EnderecoForms enderecoForms){
+        this.enderecoService.alterarEndereco(idEndereco,enderecoForms);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("deletar-endereco/{idEndereco}")
-    public ResponseEntity<Void> deleterEndereco(@PathVariable Long idEndereco){
-        return this.enderecoService.deletarEndereco(idEndereco);
+    public ResponseEntity<HttpStatus> deleterEndereco(@PathVariable Long idEndereco){
+        this.enderecoService.deletarEndereco(idEndereco);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
