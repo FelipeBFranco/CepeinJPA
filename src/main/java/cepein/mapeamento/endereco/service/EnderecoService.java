@@ -55,7 +55,11 @@ public class EnderecoService {
     }
 
     @Transactional
-    public ResponseEntity<Void> deletarEndereco(Long idEndereco){
+    public Void deletarEndereco(Long idEndereco){
+        Endereco endereco = this.buscarEndereco(idEndereco);
+        if(endereco.getPessoaPorId() != null && endereco.getPessoaPorUuid() != null){
+            throw new PessoaExistException("Uma pessoa possui este endereço, não é possivel deleta-lo");
+        }
         this.enderecoRepository.deleteById(idEndereco);
         return null;
     }
