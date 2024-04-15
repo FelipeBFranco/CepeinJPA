@@ -1,6 +1,6 @@
-package cepein.mapeamento.endereco.forms;
+package cepein.mapeamento.infra.forms;
 
-import cepein.mapeamento.endereco.model.Endereco;
+import cepein.mapeamento.model.Endereco;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class EnderecoForms {
 
     @Size(max = 250, message = "O campo 'descriçao' pode ter no máximo {MAX} caracteres!")
@@ -30,6 +31,7 @@ public class EnderecoForms {
     private String estado;
 
     public Endereco converter(Endereco endereco){
+        endereco.setUuid(Objects.isNull(this.uuid) ? endereco.getUuid() : this.uuid);
         endereco.setRua(Objects.isNull(this.rua) ? endereco.getRua() : this.rua);
         endereco.setCep(Objects.isNull(this.cep) ? endereco.getCep() : this.cep);
         endereco.setCidade(Objects.isNull(this.cidade) ? endereco.getCidade() : this.cidade);

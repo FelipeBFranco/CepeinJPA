@@ -1,20 +1,19 @@
-package cepein.mapeamento.endereco.model;
+package cepein.mapeamento.model;
 
-import cepein.mapeamento.pessoa.model.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "endereco")
 public class Endereco {
 
     @Id
+    @EqualsAndHashCode.Include//conparação mais superficial
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_endereco;
 

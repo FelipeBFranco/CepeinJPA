@@ -1,8 +1,8 @@
-package cepein.mapeamento.endereco.resource;
+package cepein.mapeamento.infra.resource;
 
-import cepein.mapeamento.endereco.dto.EnderecoDto;
-import cepein.mapeamento.endereco.forms.EnderecoForms;
-import cepein.mapeamento.endereco.service.EnderecoService;
+import cepein.mapeamento.infra.dto.EnderecoDto;
+import cepein.mapeamento.infra.forms.EnderecoForms;
+import cepein.mapeamento.infra.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

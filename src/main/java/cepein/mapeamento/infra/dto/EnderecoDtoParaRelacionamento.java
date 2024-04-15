@@ -1,11 +1,9 @@
-package cepein.mapeamento.endereco.dto;
+package cepein.mapeamento.infra.dto;
 
-import cepein.mapeamento.endereco.model.Endereco;
+import cepein.mapeamento.model.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
-import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
 public class EnderecoDtoParaRelacionamento {

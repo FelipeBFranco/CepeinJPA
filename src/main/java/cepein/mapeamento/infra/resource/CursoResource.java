@@ -1,10 +1,8 @@
-package cepein.mapeamento.curso.resource;
+package cepein.mapeamento.infra.resource;
 
-import cepein.mapeamento.curso.dto.CursoDto;
-import cepein.mapeamento.curso.forms.CursoForms;
-import cepein.mapeamento.curso.service.CursoService;
-import cepein.mapeamento.endereco.dto.EnderecoDto;
-import cepein.mapeamento.endereco.forms.EnderecoForms;
+import cepein.mapeamento.infra.dto.CursoDto;
+import cepein.mapeamento.infra.forms.CursoForms;
+import cepein.mapeamento.infra.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

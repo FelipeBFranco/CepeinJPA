@@ -1,6 +1,6 @@
-package cepein.mapeamento.curso.dto;
+package cepein.mapeamento.infra.dto;
 
-import cepein.mapeamento.curso.model.Curso;
+import cepein.mapeamento.model.Curso;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

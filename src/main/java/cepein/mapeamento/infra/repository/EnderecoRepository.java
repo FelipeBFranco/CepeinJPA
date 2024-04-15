@@ -1,6 +1,6 @@
-package cepein.mapeamento.endereco.repository;
+package cepein.mapeamento.infra.repository;
 
-import cepein.mapeamento.endereco.model.Endereco;
+import cepein.mapeamento.model.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EnderecoRepository extends JpaRepository<Endereco,Long> {

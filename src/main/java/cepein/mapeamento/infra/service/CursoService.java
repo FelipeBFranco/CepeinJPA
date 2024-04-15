@@ -1,18 +1,13 @@
-package cepein.mapeamento.curso.service;
+package cepein.mapeamento.infra.service;
 
-import cepein.mapeamento.curso.dto.CursoDto;
-import cepein.mapeamento.curso.forms.CursoForms;
-import cepein.mapeamento.curso.model.Curso;
-import cepein.mapeamento.curso.repository.CursoRepository;
-import cepein.mapeamento.pedido.service.PedidoService;
-import cepein.mapeamento.pessoa.model.Pessoa;
-import cepein.mapeamento.pessoa.repository.PessoaRepository;
-import cepein.mapeamento.pessoa.service.PessoaService;
+import cepein.mapeamento.infra.dto.CursoDto;
+import cepein.mapeamento.infra.forms.CursoForms;
+import cepein.mapeamento.model.Curso;
+import cepein.mapeamento.infra.repository.CursoRepository;
+import cepein.mapeamento.model.Pessoa;
 import exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +24,7 @@ public class CursoService {
         this.pessoaService = pessoaService;
     }
 
-    private Curso buscarCurso(Long idCurso){
+    public Curso buscarCurso(Long idCurso){
         return this.cursoRepository.findById(idCurso)
                 .orElseThrow(() -> new ObjectNotFoundException("Curso não encontrado"));
     }
@@ -49,28 +44,31 @@ public class CursoService {
     }
 
     @Transactional
-    public Void cadastrarCurso(CursoForms cursoForms){
+    public void cadastrarCurso(CursoForms cursoForms){
         Pessoa pessoa = this.pessoaService.buscarPessoa(cursoForms.getPessoaId());
         Curso curso = cursoForms.converter(new Curso(), pessoa);
         this.cursoRepository.save(curso);
 
-        return null;
+
     }
 
     @Transactional
-    public Void alterarCurso(Long cursoId, CursoForms cursoForms){
+    public void alterarCurso(Long cursoId, CursoForms cursoForms){
+
         Curso curso = this.buscarCurso(cursoId);
         Pessoa pessoa = this.pessoaService.buscarPessoa(cursoForms.getPessoaId());
 
         Curso cursoAlterado = cursoForms.converter(curso, pessoa);
         this.cursoRepository.save(cursoAlterado);
-        return null;
+
     }
 
     @Transactional
-    public Void deletarCurso(Long idCurso){
+    public void deletarCurso(Long idCurso){
+        this.buscarCurso(idCurso);
+
+
         this.cursoRepository.deleteById(idCurso);
 
-        return null;
     }
 }
