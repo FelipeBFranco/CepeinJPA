@@ -1,7 +1,7 @@
-package cepein.mapeamento.pessoa.forms;
+package cepein.mapeamento.infra.forms;
 
-import cepein.mapeamento.endereco.forms.EnderecoForms;
-import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.model.Pessoa;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,13 +12,16 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PessoaForms {
 
     private String nome;
 
     private String uuid;
 
-    private List<Long> pedidoList;
+    private List<Long> idListProduto;
+
+    private List<Long> idListPedido;
 
     private EnderecoForms enderecoForms;
 
