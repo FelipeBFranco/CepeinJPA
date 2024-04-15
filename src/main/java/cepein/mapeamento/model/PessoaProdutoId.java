@@ -1,4 +1,4 @@
-package cepein.mapeamento.pessoa_produto;
+package cepein.mapeamento.model;
 
 
 import jakarta.persistence.*;

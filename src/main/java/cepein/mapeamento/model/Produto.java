@@ -1,7 +1,5 @@
-package cepein.mapeamento.produto.model;
+package cepein.mapeamento.model;
 
-import cepein.mapeamento.pessoa.model.Pessoa;
-import cepein.mapeamento.pessoa_produto.PessoaProduto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package cepein.mapeamento.produto.resource;
+package cepein.mapeamento.infra.resource;
 
-import cepein.mapeamento.produto.dto.ProdutoDto;
-import cepein.mapeamento.produto.forms.ProdutoForms;
-import cepein.mapeamento.produto.service.ProdutoService;
+import cepein.mapeamento.infra.dto.ProdutoDto;
+import cepein.mapeamento.infra.forms.ProdutoForms;
+import cepein.mapeamento.infra.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,26 +24,29 @@ public class ProdutoResource {
 
     @GetMapping("/listar")
     public ResponseEntity<List<ProdutoDto>> listarProdutos(){
-        return this.produtoService.listarProdutos();
+        return ResponseEntity.ok( this.produtoService.listarProdutos());
     }
 
     @GetMapping("/procurar-por-id/{idProduto}")
     public ResponseEntity<ProdutoDto> procurarProduto(@PathVariable Long idProduto){
-        return this.produtoService.procurarProduto(idProduto);
+        return ResponseEntity.ok(this.produtoService.procurarProduto(idProduto));
     }
 
     @PostMapping("/cadastrar-produto-pessoa")
     public ResponseEntity<HttpStatus> cadastrarProdutoComPessoa(@RequestBody @Valid ProdutoForms produtoForms){
-        return this.produtoService.cadastrarProdutoComPessoa(produtoForms);
+        this.produtoService.cadastrarProdutoComPessoa(produtoForms);
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/atualizar-produto/{idProduto}")
     public ResponseEntity<HttpStatus> atualizarProduto(@RequestBody @Valid ProdutoForms produtoForms, @PathVariable Long idProduto){
-        return this.produtoService.atualizarProduto(produtoForms, idProduto);
+        this.produtoService.atualizarProduto(produtoForms, idProduto);
+        return  ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/deletar/{idProduto}")
     public ResponseEntity<Void> deletarProduto(@PathVariable Long idProduto){
-        return this.produtoService.deletarProduto(idProduto);
+        this.produtoService.deletarProduto(idProduto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

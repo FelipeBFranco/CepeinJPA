@@ -1,8 +1,7 @@
-package cepein.mapeamento.pedido.forms;
+package cepein.mapeamento.infra.forms;
 
 
-import cepein.mapeamento.pedido.model.Pedido;
-import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.model.Pedido;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +25,8 @@ public class PedidoForms {
         pedido.setUuid(this.uuid);
         return pedido;
     }
+       //pedido.setUuid(pedidoForms.getUuid() != null ? pedidoForms.getUuid() : pedido.getUuid());
+      //  pedido.setDescricao(pedidoForms.getDescricao() != null ? pedidoForms.getDescricao() : pedido.getDescricao());
 
 
 

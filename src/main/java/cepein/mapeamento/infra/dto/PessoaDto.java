@@ -1,14 +1,7 @@
-package cepein.mapeamento.pessoa.dto;
+package cepein.mapeamento.infra.dto;
 
-import cepein.mapeamento.curso.dto.CursoDtoParaRelacionamento;
-import cepein.mapeamento.endereco.dto.EnderecoDtoParaRelacionamento;
-import cepein.mapeamento.endereco.model.Endereco;
-import cepein.mapeamento.pedido.dto.PedidoDtoParaRelacionamento;
-import cepein.mapeamento.pedido.model.Pedido;
-import cepein.mapeamento.pessoa.model.Pessoa;
+import cepein.mapeamento.model.Pessoa;
 
-import cepein.mapeamento.pessoa_produto.PessoaProduto;
-import cepein.mapeamento.produto.dto.ProdutoDtoParaRelacionamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -36,7 +29,7 @@ public class PessoaDto {
     private List<ProdutoDtoParaRelacionamento> produtoListComEmbeddable;
 
     private List<PedidoDtoParaRelacionamento> pedidoListComJoinTable;
-     List<PedidoDtoParaRelacionamento> pedidoListComEmbeddable;
+    private List<PedidoDtoParaRelacionamento> pedidoListComEmbeddable;
 
 
 
@@ -55,9 +48,7 @@ public class PessoaDto {
 
     }
     public static List<PessoaDto> converter(List<Pessoa> pessoaList){
-        return pessoaList.stream()
-                .map(PessoaDto::new)
-                .collect(Collectors.toList());
+        return pessoaList.stream().map(PessoaDto::new).collect(Collectors.toList());
     }
 
 }

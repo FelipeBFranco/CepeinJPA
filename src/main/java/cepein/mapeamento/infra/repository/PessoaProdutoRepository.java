@@ -1,6 +1,6 @@
-package cepein.mapeamento.pessoa_produto.repository;
+package cepein.mapeamento.infra.repository;
 
-import cepein.mapeamento.pessoa_produto.PessoaProduto;
+import cepein.mapeamento.model.PessoaProduto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PessoaProdutoRepository extends JpaRepository<PessoaProduto, Long> {

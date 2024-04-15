@@ -1,7 +1,7 @@
-package cepein.mapeamento.pedido.model;
+package cepein.mapeamento.model;
 
-import cepein.mapeamento.pessoa.model.Pessoa;
-import cepein.mapeamento.pessoa_pedido.PessoaPedido;
+import cepein.mapeamento.model.Pessoa;
+import cepein.mapeamento.model.PessoaPedido;
 import jakarta.persistence.*;
 import lombok.*;
 

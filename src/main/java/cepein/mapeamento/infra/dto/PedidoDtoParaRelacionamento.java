@@ -1,7 +1,7 @@
-package cepein.mapeamento.pedido.dto;
+package cepein.mapeamento.infra.dto;
 
-import cepein.mapeamento.pedido.model.Pedido;
-import cepein.mapeamento.pessoa_pedido.PessoaPedido;
+import cepein.mapeamento.model.Pedido;
+import cepein.mapeamento.model.PessoaPedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

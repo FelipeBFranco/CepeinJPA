@@ -1,8 +1,8 @@
-package cepein.mapeamento.pedido.resource;
+package cepein.mapeamento.infra.resource;
 
-import cepein.mapeamento.pedido.dto.PedidoDto;
-import cepein.mapeamento.pedido.forms.PedidoForms;
-import cepein.mapeamento.pedido.service.PedidoService;
+import cepein.mapeamento.infra.dto.PedidoDto;
+import cepein.mapeamento.infra.forms.PedidoForms;
+import cepein.mapeamento.infra.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,26 +23,29 @@ public class PedidoResource {
 
     @GetMapping("/listar")
     public ResponseEntity<List<PedidoDto>> listarPedidos(){
-        return this.pedidoService.listarPedidos();
+        return ResponseEntity.ok(this.pedidoService.listarPedidos());
     }
 
     @GetMapping("/procurar-por-id/{idPedido}")
     public ResponseEntity<PedidoDto> procurarPedido(@PathVariable Long idPedido){
-        return this.pedidoService.procurarPedido(idPedido);
+        return ResponseEntity.ok(this.pedidoService.procurarPedido(idPedido));
     }
 
     @PostMapping(path = "/cadastrar")
     public ResponseEntity<HttpStatus> cadastrarPedido(@RequestBody PedidoForms pedidoForm){
-        return this.pedidoService.cadastrarPedido(pedidoForm);
+        this.pedidoService.cadastrarPedido(pedidoForm);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping(path = "/atualizar/{idPedido}")
     public ResponseEntity<HttpStatus> atualizarPedidoExistente(@RequestBody PedidoForms pedidoForms, @PathVariable Long idPedido){
-        return this.pedidoService.atualizarPedidoExistente(pedidoForms, idPedido);
+        this.pedidoService.atualizarPedidoExistente(pedidoForms, idPedido);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/deletar/{idPedido}")
-    public ResponseEntity<Void> deletarPedido(@PathVariable Long idPedido){
-        return this.pedidoService.deletarPedido(idPedido);
+    public ResponseEntity<HttpStatus> deletarPedido(@PathVariable Long idPedido){
+        this.pedidoService.deletarPedido(idPedido);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

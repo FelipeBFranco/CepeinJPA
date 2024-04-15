@@ -1,14 +1,7 @@
-package cepein.mapeamento.pessoa.model;
+package cepein.mapeamento.model;
 
-import cepein.mapeamento.curso.model.Curso;
-import cepein.mapeamento.endereco.model.Endereco;
-import cepein.mapeamento.pedido.model.Pedido;
-import cepein.mapeamento.pessoa_pedido.PessoaPedido;
-import cepein.mapeamento.pessoa_produto.PessoaProduto;
-import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -30,19 +23,15 @@ public class Pessoa {
 
     private String uuid;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "id_endereco_fk", referencedColumnName = "id_endereco")
     private Endereco enderecoPorId;
 
-    @Column(name = "id_endereco_fk", updatable = false, insertable = false)
-    private Long enderecoID;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "uuid_endereco_fk", referencedColumnName = "uuid")
     private Endereco enderecoPorUuid;
 
-    @Column(name = "uuid_endereco_fk", insertable = false, updatable = false)
-    private String enderecoUuid;
 
     @OneToMany(mappedBy = "pessoaPorId", cascade = CascadeType.ALL)
     private List<Curso> cursoPorId;

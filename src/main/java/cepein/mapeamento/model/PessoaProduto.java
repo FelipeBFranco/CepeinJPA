@@ -1,11 +1,8 @@
-package cepein.mapeamento.pessoa_produto;
+package cepein.mapeamento.model;
 
-import cepein.mapeamento.pessoa.model.Pessoa;
-import cepein.mapeamento.produto.model.Produto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor

@@ -1,6 +1,7 @@
-package cepein.mapeamento.produto.forms;
+package cepein.mapeamento.infra.forms;
 
-import cepein.mapeamento.produto.model.Produto;
+import cepein.mapeamento.model.Produto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class ProdutoForms {
 
     private String descricao;
