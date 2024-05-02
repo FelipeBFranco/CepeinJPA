@@ -1,19 +1,16 @@
-package cepein.mapeamento.model;
+package cepein.mapeamento.infra.persistence.jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-@Getter
 @Setter
+@Getter
+@Builder
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
 @Table(name = "endereco")
-public class Endereco {
-
+public class JpaEnderecoEntity {
     @Id
-    @EqualsAndHashCode.Include//conparação mais superficial
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_endereco;
 
@@ -28,8 +25,10 @@ public class Endereco {
     private String estado;
 
     @OneToOne(mappedBy = "enderecoPorId")
-    private Pessoa pessoaPorId;
+    private JpaPessoaEntity pessoaPorId;
 
     @OneToOne(mappedBy = "enderecoPorUuid")
-    private Pessoa pessoaPorUuid;
+    private JpaPessoaEntity pessoaPorUuid;
+
+
 }
