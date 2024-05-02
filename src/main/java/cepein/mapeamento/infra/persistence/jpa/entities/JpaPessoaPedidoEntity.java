@@ -1,4 +1,5 @@
-package cepein.mapeamento.model;
+package cepein.mapeamento.infra.persistence.jpa.entities;
+
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,28 +11,32 @@ import lombok.*;
 @Entity
 @Table(name = "pessoa_pedido")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PessoaPedido {
-
+public class JpaPessoaPedidoEntity {
     private  static  final long serialVersionUID = 1L;
 
     @EmbeddedId
     @EqualsAndHashCode.Include
-    private PessoaPedidoId pessoaPedidoId;
+    private JpaPessoaPedidoIdEntity pessoaPedidoId;
 
     @MapsId("uuidPessoa")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne
     @JoinColumn(name = "uuid_pessoa_fk",referencedColumnName = "uuid",insertable=false, updatable=false)
-    private Pessoa pessoa;
+    private JpaPessoaEntity pessoa;
 
     @MapsId("uuidPedido")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne
     @JoinColumn(name = "uuid_pedido_fk",referencedColumnName = "uuid",insertable=false, updatable=false)
-    private Pedido pedido;
+    private JpaPedidoEntity pedido;
+
+    public JpaPessoaPedidoEntity(JpaPessoaEntity pessoa, JpaPedidoEntity pedido) {
+        this.pedido = pedido;
+        this.pessoa = pessoa;
+    }
+
     @PrePersist
     public void setPessoaPedidoId(){
-        this.pessoaPedidoId = new PessoaPedidoId();
+        this.pessoaPedidoId = new JpaPessoaPedidoIdEntity();
         this.pessoaPedidoId.setUuidPessoa(this.pessoa.getUuid());
         this.pessoaPedidoId.setUuidPedido(this.pedido.getUuid());
     }
-
 }
