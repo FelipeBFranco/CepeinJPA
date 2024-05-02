@@ -1,21 +1,18 @@
-package cepein.mapeamento.model;
+package cepein.mapeamento.infra.persistence.jpa.entities;
 
-import cepein.mapeamento.model.Pessoa;
-import cepein.mapeamento.model.PessoaPedido;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
-@ToString
 @Table(name = "pedido")
-public class Pedido {
-
+public class JpaPedidoEntity {
     @Id
     @Column(name = "id_pedido")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +23,9 @@ public class Pedido {
     private String uuid;
 
     @ManyToMany(mappedBy = "pedidoListComJoinTable")
-    private List<Pessoa> pessoaListComJoinTable;
+    private List<JpaPessoaEntity> pessoaListComJoinTable;
 
     @OneToMany(mappedBy = "pedido")
-    private List<PessoaPedido> pessoaListComEmbeddable;
+    private List<JpaPessoaPedidoEntity> pessoaListComEmbeddable;
+
 }
