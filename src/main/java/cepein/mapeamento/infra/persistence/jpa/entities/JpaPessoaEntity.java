@@ -1,19 +1,17 @@
-package cepein.mapeamento.model;
+package cepein.mapeamento.infra.persistence.jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "pessoa")
-public class Pessoa {
-
+public class JpaPessoaEntity {
     @Id
     @Column(name = "id_pessoa")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,19 +23,19 @@ public class Pessoa {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "id_endereco_fk", referencedColumnName = "id_endereco")
-    private Endereco enderecoPorId;
+    private JpaEnderecoEntity enderecoPorId;
 
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "uuid_endereco_fk", referencedColumnName = "uuid")
-    private Endereco enderecoPorUuid;
+    private JpaEnderecoEntity enderecoPorUuid;
 
 
     @OneToMany(mappedBy = "pessoaPorId", cascade = CascadeType.ALL)
-    private List<Curso> cursoPorId;
+    private List<JpaCursoEntity> cursoPorId;
 
     @OneToMany(mappedBy = "pessoaPorUuid", cascade = CascadeType.ALL)
-    private List<Curso> cursoPorUuid;
+    private List<JpaCursoEntity> cursoPorUuid;
 
     @ManyToMany
     @JoinTable(name="pessoa_produto",
@@ -45,10 +43,10 @@ public class Pessoa {
             @JoinColumn(name="id_pessoa_fk", referencedColumnName="id_pessoa"),
             inverseJoinColumns=
             @JoinColumn(name="id_produto_fk", referencedColumnName="id_produto"))
-    private List<Produto> produtoListComJoinTable;
+    private List<JpaProdutoEntity> produtoListComJoinTable;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<PessoaProduto> produtoListComEmbeddable;
+    private List<JpaPessoaProdutoEntity> produtoListComEmbeddable;
 
 
     @ManyToMany
@@ -57,10 +55,10 @@ public class Pessoa {
             @JoinColumn(name="uuid_pessoa_fk", referencedColumnName="uuid"),
             inverseJoinColumns=
             @JoinColumn(name="uuid_pedido_fk", referencedColumnName="uuid"))
-    private List<Pedido> pedidoListComJoinTable;
+    private List<JpaPedidoEntity> pedidoListComJoinTable;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<PessoaPedido> pedidoListComEmbeddable;
+    private List<JpaPessoaPedidoEntity> pedidoListComEmbeddable;
 
 
 }
