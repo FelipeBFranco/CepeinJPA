@@ -1,21 +1,17 @@
-package cepein.mapeamento.model;
+package cepein.mapeamento.infra.persistence.jpa.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "produto")
-public class Produto {
-
+public class JpaProdutoEntity {
     @Id
     @Column(name = "id_produto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +20,9 @@ public class Produto {
     private String descricao;
 
     @ManyToMany(mappedBy = "produtoListComJoinTable")
-    private List<Pessoa> pessoaListComJoinTable;
+    private List<JpaPessoaEntity> pessoaListComJoinTable;
 
     @OneToMany(mappedBy = "produto")
-    private List<PessoaProduto> pessoaListComEmbeddable;
+    private List<JpaPessoaProdutoEntity> pessoaListComEmbeddable;
+
 }
