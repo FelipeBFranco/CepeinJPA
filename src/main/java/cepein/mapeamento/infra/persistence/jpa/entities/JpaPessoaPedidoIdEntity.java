@@ -1,6 +1,7 @@
-package cepein.mapeamento.model;
+package cepein.mapeamento.infra.persistence.jpa.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
@@ -11,14 +12,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Embeddable
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PessoaPedidoId implements Serializable {
+public class JpaPessoaPedidoIdEntity implements Serializable {
 
     @Getter(value = AccessLevel.NONE)
     private  static  final long serialVersionUID = 1L;
 
     @Column(name = "uuid_pessoa_fk")
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String uuidPessoa;
 
     @Column(name = "uuid_pedido_fk")
