@@ -1,6 +1,6 @@
-package cepein.mapeamento.infra.forms;
+package cepein.mapeamento.infra.adapters.http.forms;
 
-import cepein.mapeamento.model.Pessoa;
+import cepein.mapeamento.acore.domain.models.Pessoa;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +28,12 @@ public class PessoaForms {
     public Pessoa converter(Pessoa pessoa){
         pessoa.setNome(Objects.isNull(this.nome) ? pessoa.getNome() : this.nome);
         pessoa.setUuid(Objects.isNull(this.uuid) ? pessoa.getUuid() : this.uuid);
+        return pessoa;
+    }
+    public Pessoa converter(){
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(this.nome);
+        pessoa.setUuid(this.uuid);
         return pessoa;
     }
 }
