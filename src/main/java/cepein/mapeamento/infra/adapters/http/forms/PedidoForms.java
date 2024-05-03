@@ -1,7 +1,7 @@
-package cepein.mapeamento.infra.forms;
+package cepein.mapeamento.infra.adapters.http.forms;
 
 
-import cepein.mapeamento.model.Pedido;
+import cepein.mapeamento.acore.domain.models.Pedido;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class PedidoForms {
 
+    private Long id;
+
     private String descricao;
 
     private String uuid;
@@ -21,13 +23,15 @@ public class PedidoForms {
 
 
     public Pedido converter(Pedido pedido){
+        pedido.setDescricao(this.getDescricao() != null ? this.getDescricao() : pedido.getDescricao());
+        pedido.setUuid(this.getUuid() != null ? this.getUuid() : pedido.getUuid());
+        return pedido;
+    }
+    public Pedido converter(){
+        Pedido pedido = new Pedido();
         pedido.setDescricao(this.descricao);
         pedido.setUuid(this.uuid);
         return pedido;
     }
-       //pedido.setUuid(pedidoForms.getUuid() != null ? pedidoForms.getUuid() : pedido.getUuid());
-      //  pedido.setDescricao(pedidoForms.getDescricao() != null ? pedidoForms.getDescricao() : pedido.getDescricao());
-
-
 
 }
