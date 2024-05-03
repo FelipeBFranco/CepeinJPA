@@ -1,12 +1,14 @@
-package cepein.mapeamento.infra.forms;
+package cepein.mapeamento.infra.adapters.http.forms;
 
-import cepein.mapeamento.model.Curso;
-import cepein.mapeamento.model.Pessoa;
+import cepein.mapeamento.acore.domain.models.Curso;
+import cepein.mapeamento.acore.domain.models.Pessoa;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -26,6 +28,14 @@ public class CursoForms {
 
     public Curso converter(Curso curso, Pessoa pessoa){
 
+        curso.setDescricao(Objects.isNull(this.descricao) ? curso.getDescricao() : this.descricao);
+        curso.setPessoaPorId(pessoa);
+        curso.setPessoaPorUuid(pessoa);
+
+        return curso;
+    }
+    public Curso converter( Pessoa pessoa){
+        Curso curso = new Curso();
         curso.setDescricao(this.descricao);
         curso.setPessoaPorId(pessoa);
         curso.setPessoaPorUuid(pessoa);
