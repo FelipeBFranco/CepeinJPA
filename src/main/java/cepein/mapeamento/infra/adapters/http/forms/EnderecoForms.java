@@ -1,6 +1,6 @@
-package cepein.mapeamento.infra.forms;
+package cepein.mapeamento.infra.adapters.http.forms;
 
-import cepein.mapeamento.model.Endereco;
+import cepein.mapeamento.acore.domain.models.Endereco;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +14,8 @@ import java.util.Objects;
 @Setter
 
 public class EnderecoForms {
+
+    private Long id;
 
     @Size(max = 250, message = "O campo 'descriçao' pode ter no máximo {MAX} caracteres!")
     private String uuid;
@@ -30,12 +32,21 @@ public class EnderecoForms {
     @Size(max = 2, message = "O campo estado pode ter no máximo {max} caracteres!")
     private String estado;
 
-    public Endereco converter(Endereco endereco){
+    public  Endereco converter(Endereco endereco){
         endereco.setUuid(Objects.isNull(this.uuid) ? endereco.getUuid() : this.uuid);
         endereco.setRua(Objects.isNull(this.rua) ? endereco.getRua() : this.rua);
         endereco.setCep(Objects.isNull(this.cep) ? endereco.getCep() : this.cep);
         endereco.setCidade(Objects.isNull(this.cidade) ? endereco.getCidade() : this.cidade);
         endereco.setEstado(Objects.isNull(this.estado) ? endereco.getEstado() : this.estado);
+        return endereco;
+    }
+    public  Endereco converter(){
+        Endereco endereco = new Endereco();
+        endereco.setUuid(this.uuid);
+        endereco.setRua(this.rua);
+        endereco.setCep(this.cep);
+        endereco.setCidade(this.cidade);
+        endereco.setEstado(this.estado);
         return endereco;
     }
 }
