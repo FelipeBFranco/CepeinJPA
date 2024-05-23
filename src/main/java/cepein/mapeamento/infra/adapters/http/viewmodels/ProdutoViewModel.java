@@ -1,20 +1,20 @@
 package cepein.mapeamento.infra.adapters.http.viewmodels;
 
 
-import cepein.mapeamento.acore.domain.models.Produto;
+import cepein.mapeamento.acore.domain.models.produto.ProdutoQuery;
 import cepein.mapeamento.infra.adapters.http.dtos.ProdutoDto;
 
 import java.util.Objects;
 
 public class ProdutoViewModel {
-    public static ProdutoDto toDto(Produto produto){
+    public static ProdutoDto toDto(ProdutoQuery produtoQuery){
         return ProdutoDto.builder()
-                .id(produto.getId())
-                .descricao(produto.getDescricao())
-                .pessoaListComJoinTable(Objects.isNull(produto.getPessoaListComJoinTable())?
-                        null : PessoaViewModel.toDto(produto.getPessoaListComJoinTable()))
-                .pessoaListComEmbeddable(Objects.isNull(produto.getPessoaListComEmbeddable())?
-                        null : PessoaViewModel.toDto(produto.getPessoaListComEmbeddable()))
+                .id(produtoQuery.getId())
+                .descricao(produtoQuery.getDescricao())
+                .pessoaListComJoinTable(Objects.isNull(produtoQuery.getPessoaQueryListComJoinTable())?
+                        null : PessoaViewModel.toDto(produtoQuery.getPessoaQueryListComJoinTable()))
+                .pessoaListComEmbeddable(Objects.isNull(produtoQuery.getPessoaQueryListComEmbeddable())?
+                        null : PessoaViewModel.toDto(produtoQuery.getPessoaQueryListComEmbeddable()))
                 .build();
     }
 }
