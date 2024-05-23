@@ -1,14 +1,22 @@
 package cepein.mapeamento.app.usecases.curso;
 
 import cepein.mapeamento.app.gateways.CursoGateway;
+import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
 
-public class DeletarCursoUseCase {
-    private CursoGateway cursoGateway;
+public class DeletarCursoUseCase implements UseCaseRequest<Long> {
+    private final CursoGateway cursoGateway;
+    private Long idCurso;
 
     public DeletarCursoUseCase(CursoGateway cursoGateway){
         this.cursoGateway = cursoGateway;
     }
-    public void deletarCurso(Long id){
-        this.cursoGateway.deletarCursoPorId(id);
+    @Override
+    public void execute(Long id) {
+        this.idCurso = id;
+        this.verificarExistenciaCurso();
+        this.cursoGateway.deletar(id);
+    }
+    private void verificarExistenciaCurso(){
+        this.cursoGateway.buscar(idCurso);
     }
 }
