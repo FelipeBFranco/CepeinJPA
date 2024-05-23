@@ -1,4 +1,4 @@
-package cepein.mapeamento.acore.domain.models;
+package cepein.mapeamento.acore.domain.models.curso;
 
 
 import lombok.*;
@@ -8,13 +8,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Curso {
-
+public class CursoCommand {
     private Long id;
 
     private String descricao;
 
-    private Pessoa pessoaPorId;
+    private Long idPessoa;
 
-    private Pessoa pessoaPorUuid;
+    private String uuidPessoa;
 }
+
