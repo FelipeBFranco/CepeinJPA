@@ -1,6 +1,7 @@
 package cepein.mapeamento.infra.adapters.http.forms;
 
-import cepein.mapeamento.acore.domain.models.Endereco;
+import cepein.mapeamento.acore.domain.models.endereco.EnderecoCommand;
+import cepein.mapeamento.acore.domain.models.endereco.EnderecoQuery;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,21 +33,22 @@ public class EnderecoForms {
     @Size(max = 2, message = "O campo estado pode ter no máximo {max} caracteres!")
     private String estado;
 
-    public  Endereco converter(Endereco endereco){
-        endereco.setUuid(Objects.isNull(this.uuid) ? endereco.getUuid() : this.uuid);
-        endereco.setRua(Objects.isNull(this.rua) ? endereco.getRua() : this.rua);
-        endereco.setCep(Objects.isNull(this.cep) ? endereco.getCep() : this.cep);
-        endereco.setCidade(Objects.isNull(this.cidade) ? endereco.getCidade() : this.cidade);
-        endereco.setEstado(Objects.isNull(this.estado) ? endereco.getEstado() : this.estado);
-        return endereco;
+    public EnderecoCommand converter(EnderecoQuery enderecoQuery){
+        EnderecoCommand enderecoCommand = new EnderecoCommand();
+        enderecoCommand.setUuid(Objects.isNull(this.uuid) ? enderecoQuery.getUuid() : this.uuid);
+        enderecoCommand.setRua(Objects.isNull(this.rua) ? enderecoQuery.getRua() : this.rua);
+        enderecoCommand.setCep(Objects.isNull(this.cep) ? enderecoQuery.getCep() : this.cep);
+        enderecoCommand.setCidade(Objects.isNull(this.cidade) ? enderecoQuery.getCidade() : this.cidade);
+        enderecoCommand.setEstado(Objects.isNull(this.estado) ? enderecoQuery.getEstado() : this.estado);
+        return enderecoCommand;
     }
-    public  Endereco converter(){
-        Endereco endereco = new Endereco();
-        endereco.setUuid(this.uuid);
-        endereco.setRua(this.rua);
-        endereco.setCep(this.cep);
-        endereco.setCidade(this.cidade);
-        endereco.setEstado(this.estado);
-        return endereco;
+    public EnderecoCommand converter(){
+        EnderecoCommand enderecoCommand = new EnderecoCommand();
+        enderecoCommand.setUuid(this.uuid);
+        enderecoCommand.setRua(this.rua);
+        enderecoCommand.setCep(this.cep);
+        enderecoCommand.setCidade(this.cidade);
+        enderecoCommand.setEstado(this.estado);
+        return enderecoCommand;
     }
 }
