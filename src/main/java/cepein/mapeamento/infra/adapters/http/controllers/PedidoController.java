@@ -5,6 +5,7 @@ import cepein.mapeamento.app.usecases.pedido.*;
 import cepein.mapeamento.infra.adapters.http.dtos.PedidoDto;
 import cepein.mapeamento.infra.adapters.http.forms.PedidoForms;
 import cepein.mapeamento.infra.adapters.http.viewmodels.PedidoViewModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,40 +18,37 @@ import java.util.stream.Collectors;
 public class PedidoController {
 
     private final PedidoGateway pedidoGateway;
-
+    @Autowired
     public PedidoController(PedidoGateway pedidoGateway) {
         this.pedidoGateway = pedidoGateway;
     }
 
 
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<PedidoDto> procurarPedido(@PathVariable Long id){
 
+        EncontrarPedidoUseCase encontrarPedidoUseCase = new EncontrarPedidoUseCase(this.pedidoGateway);
+        PedidoDto pedidoDto = PedidoViewModel.toDto(encontrarPedidoUseCase.execute(id));
+
+        return ResponseEntity.ok(pedidoDto);
+    }
     @GetMapping("/listar")
     public ResponseEntity<List<PedidoDto>> listarPedidos(){
 
         EncontrarListaDePedidoUseCase encontrarListaDePedidoUseCase = new EncontrarListaDePedidoUseCase(this.pedidoGateway);
-        List<PedidoDto> pedidoDtoList = encontrarListaDePedidoUseCase.encontrarListaPedido()
+        List<PedidoDto> pedidoDtoList = encontrarListaDePedidoUseCase.execute()
                 .stream()
                 .map(PedidoViewModel::toDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(pedidoDtoList);
     }
-
-    @GetMapping("/procurar-por-id/{id}")
-    public ResponseEntity<PedidoDto> procurarPedido(@PathVariable Long id){
-
-        EncontrarPedidoUseCase encontrarPedidoUseCase = new EncontrarPedidoUseCase(this.pedidoGateway);
-        PedidoDto pedidoDto = PedidoViewModel.toDto(encontrarPedidoUseCase.encontrarPedidoPorId(id));
-
-        return ResponseEntity.ok(pedidoDto);
-    }
-
     @PostMapping(path = "/cadastrar")
     public ResponseEntity<HttpStatus> cadastrarPedido(@RequestBody PedidoForms pedidoForm){
 
         CadastrarPedidoUseCase cadastrarPedidoUseCase = new CadastrarPedidoUseCase(this.pedidoGateway);
 
-        cadastrarPedidoUseCase.criarPedido(pedidoForm.converter());
+        cadastrarPedidoUseCase.execute(pedidoForm);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -58,11 +56,9 @@ public class PedidoController {
     @PutMapping(path = "/atualizar")
     public ResponseEntity<HttpStatus> atualizarPedidoExistente(@RequestBody PedidoForms pedidoForms){
 
-        EncontrarPedidoUseCase encontrarPedidoUseCase = new EncontrarPedidoUseCase(this.pedidoGateway);
         AtualizarPedidoUseCase atualizarPedidoUseCase = new AtualizarPedidoUseCase(this.pedidoGateway);
 
-        atualizarPedidoUseCase.atualizarPedido(pedidoForms
-                .converter(encontrarPedidoUseCase.encontrarPedidoPorId(pedidoForms.getId())));
+        atualizarPedidoUseCase.execute(pedidoForms);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -72,7 +68,7 @@ public class PedidoController {
 
         DeletarPedidoUseCase deletarPedidoUseCase = new DeletarPedidoUseCase(this.pedidoGateway);
 
-        deletarPedidoUseCase.deletarPedido(id);
+        deletarPedidoUseCase.execute(id);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
