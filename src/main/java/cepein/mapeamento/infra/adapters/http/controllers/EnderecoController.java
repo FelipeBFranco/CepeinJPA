@@ -5,6 +5,7 @@ import cepein.mapeamento.app.usecases.endereco.*;
 import cepein.mapeamento.infra.adapters.http.dtos.EnderecoDto;
 import cepein.mapeamento.infra.adapters.http.forms.EnderecoForms;
 import cepein.mapeamento.infra.adapters.http.viewmodels.EnderecoViewModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,14 +19,14 @@ import java.util.stream.Collectors;
 public class EnderecoController {
     private final EnderecoGateway enderecoGateway;
 
+    @Autowired
     EnderecoController (EnderecoGateway enderecoGateway){
-
         this.enderecoGateway = enderecoGateway;
     }
     @GetMapping("/buscar/{id}")
     public ResponseEntity<EnderecoDto> buscarEnderecoPorId(@PathVariable Long id){
         EncontrarEnderecoUseCase encontrarEnderecoUseCase = new EncontrarEnderecoUseCase(this.enderecoGateway);
-        EnderecoDto enderecoDto = EnderecoViewModel.toDto(encontrarEnderecoUseCase.encontrarEndereco(id)) ;
+        EnderecoDto enderecoDto = EnderecoViewModel.toDto(encontrarEnderecoUseCase.execute(id)) ;
         return ResponseEntity.ok(enderecoDto);
 
     }
@@ -33,7 +34,7 @@ public class EnderecoController {
     public ResponseEntity<List<EnderecoDto>> listarEndereco(){
 
         EncontrarListaEnderecoUseCase encontrarListaEnderecoUseCase = new EncontrarListaEnderecoUseCase(this.enderecoGateway);
-        List<EnderecoDto> enderecoDtoList =  encontrarListaEnderecoUseCase.encontrarListaEndereco()
+        List<EnderecoDto> enderecoDtoList =  encontrarListaEnderecoUseCase.execute()
                 .stream()
                 .map(EnderecoViewModel::toDto)
                 .collect(Collectors.toList());
@@ -43,24 +44,23 @@ public class EnderecoController {
     public ResponseEntity<HttpStatus> criarEndereco(@RequestBody EnderecoForms enderecoForms){
 
         CadastrarEnderecoUseCase cadastrarEnderecoUseCase = new CadastrarEnderecoUseCase(this.enderecoGateway);
-        cadastrarEnderecoUseCase.criarEndereco(enderecoForms.converter());
+        cadastrarEnderecoUseCase.execute(enderecoForms);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PatchMapping("/atualizar")
     public ResponseEntity<HttpStatus> atualizarEndereco(@RequestBody EnderecoForms enderecoForms){
 
-        EncontrarEnderecoUseCase encontrarEnderecoUseCase = new EncontrarEnderecoUseCase(this.enderecoGateway);
         AtualizarEnderecoUseCase atualizarEnderecoUseCase = new AtualizarEnderecoUseCase(this.enderecoGateway);
-        atualizarEnderecoUseCase.atualizarEndereco(enderecoForms.converter(encontrarEnderecoUseCase.encontrarEndereco(enderecoForms.getId())));
+        atualizarEnderecoUseCase.execute(enderecoForms);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<HttpStatus> deletarEndereco(@PathVariable Long id){
-        System.out.println("controller");
+
         DeletarEnderecoUseCase deletarEnderecoUseCase = new DeletarEnderecoUseCase(this.enderecoGateway);
-        deletarEnderecoUseCase.deletarEndereco(id);
+        deletarEnderecoUseCase.execute(id);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
