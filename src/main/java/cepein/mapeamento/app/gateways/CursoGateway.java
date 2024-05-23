@@ -1,13 +1,13 @@
 package cepein.mapeamento.app.gateways;
 
-import cepein.mapeamento.acore.domain.models.Curso;
+
+import cepein.mapeamento.acore.domain.models.curso.CursoCommand;
+import cepein.mapeamento.acore.domain.models.curso.CursoQuery;
+import cepein.mapeamento.utils.clean.application.gateway.StorageGateway;
 
 import java.util.List;
 
-public interface CursoGateway {
+public interface CursoGateway extends StorageGateway<CursoCommand,CursoQuery,Long>{
+    List<CursoQuery> encontrarTodosOsCursos();
 
-    Curso encontrarCursoPorId(Long id);
-    List<Curso> encontrarTodosOsCursos();
-    void salvarCurso(Curso curso);
-    void deletarCursoPorId(Long id);
 }
