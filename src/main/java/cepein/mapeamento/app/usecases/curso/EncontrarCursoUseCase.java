@@ -1,15 +1,19 @@
 package cepein.mapeamento.app.usecases.curso;
 
-import cepein.mapeamento.acore.domain.models.Curso;
-import cepein.mapeamento.app.gateways.CursoGateway;
 
-public class EncontrarCursoUseCase {
-    private CursoGateway cursoGateway;
+import cepein.mapeamento.acore.domain.models.curso.CursoQuery;
+import cepein.mapeamento.app.gateways.CursoGateway;
+import cepein.mapeamento.utils.clean.application.useCase.UseCase;
+
+public class EncontrarCursoUseCase implements UseCase<Long,CursoQuery> {
+    private final CursoGateway cursoGateway;
 
     public EncontrarCursoUseCase(CursoGateway cursoGateway){
         this.cursoGateway = cursoGateway;
     }
-    public Curso encontrarCurso(Long id){
-        return this.cursoGateway.encontrarCursoPorId(id);
+
+    @Override
+    public CursoQuery execute(Long id) {
+        return this.cursoGateway.buscar(id);
     }
 }
