@@ -1,17 +1,18 @@
 package cepein.mapeamento.app.usecases.produto;
 
-import cepein.mapeamento.acore.domain.models.Produto;
+import cepein.mapeamento.acore.domain.models.produto.ProdutoQuery;
 import cepein.mapeamento.app.gateways.ProdutoGateway;
+import cepein.mapeamento.utils.clean.application.useCase.UseCaseResponse;
 
 import java.util.List;
 
-public class EncontrarListaDeProdutoUseCase {
-    private ProdutoGateway produtoGateway;
+public class EncontrarListaDeProdutoUseCase implements UseCaseResponse<List<ProdutoQuery>> {
+    private final ProdutoGateway produtoGateway;
     public EncontrarListaDeProdutoUseCase(ProdutoGateway produtoGateway){
         this.produtoGateway = produtoGateway;
     }
-
-    public List<Produto> encontrarListaProduto() {
+    @Override
+    public List<ProdutoQuery> execute() {
        return produtoGateway.encontrarTodasOsProduto();
     }
 }
