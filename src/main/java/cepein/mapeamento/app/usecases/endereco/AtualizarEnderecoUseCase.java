@@ -1,16 +1,20 @@
 package cepein.mapeamento.app.usecases.endereco;
 
-import cepein.mapeamento.acore.domain.models.Endereco;
+import cepein.mapeamento.acore.domain.models.endereco.EnderecoQuery;
 import cepein.mapeamento.app.gateways.EnderecoGateway;
+import cepein.mapeamento.infra.adapters.http.forms.EnderecoForms;
+import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
 
-public class AtualizarEnderecoUseCase {
+public class AtualizarEnderecoUseCase implements UseCaseRequest<EnderecoForms> {
 
-    private EnderecoGateway enderecoGateway;
+    private final EnderecoGateway enderecoGateway;
 
     public AtualizarEnderecoUseCase(EnderecoGateway enderecoGateway){
         this.enderecoGateway = enderecoGateway;
     }
-    public void atualizarEndereco(Endereco endereco){
-        this.enderecoGateway.salvarEndereco(endereco);
+    @Override
+    public void execute(EnderecoForms enderecoForms){
+        EnderecoQuery enderecoQuery = this.enderecoGateway.buscar(enderecoForms.getId());
+        this.enderecoGateway.salvar(enderecoForms.converter(enderecoQuery));
     }
 }
