@@ -1,6 +1,7 @@
 package cepein.mapeamento.infra.adapters.http.forms;
 
-import cepein.mapeamento.acore.domain.models.Pessoa;
+import cepein.mapeamento.acore.domain.models.pessoa.PessoaCommand;
+import cepein.mapeamento.acore.domain.models.pessoa.PessoaQuery;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,26 +15,33 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PessoaForms {
-
+    private Long id;
     private String nome;
 
     private String uuid;
 
-    private List<Long> idListProduto;
+    private Long idEndereco;
 
-    private List<Long> idListPedido;
+    private String uuidEndereco;
 
-    private EnderecoForms enderecoForms;
 
-    public Pessoa converter(Pessoa pessoa){
-        pessoa.setNome(Objects.isNull(this.nome) ? pessoa.getNome() : this.nome);
-        pessoa.setUuid(Objects.isNull(this.uuid) ? pessoa.getUuid() : this.uuid);
-        return pessoa;
+    public PessoaCommand converter(PessoaQuery pessoaQuery){
+
+        PessoaCommand pessoaCommand = new PessoaCommand();
+        pessoaCommand.setNome(Objects.isNull(this.nome) ? pessoaQuery.getNome() : this.nome);
+        pessoaCommand.setUuid(Objects.isNull(this.uuid) ? pessoaQuery.getUuid() : this.uuid);
+        pessoaCommand.setIdEndereco(Objects.isNull(this.idEndereco) ?
+                pessoaQuery.getEnderecoQueryPorId().getId_endereco() : this.idEndereco);
+        pessoaCommand.setUuidEndereco(Objects.isNull(this.uuidEndereco) ?
+                pessoaQuery.getEnderecoQueryPorUuid().getUuid() : this.uuidEndereco);
+        return pessoaCommand;
     }
-    public Pessoa converter(){
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(this.nome);
-        pessoa.setUuid(this.uuid);
-        return pessoa;
+    public PessoaCommand converter(){
+        PessoaCommand pessoaCommand = new PessoaCommand();
+        pessoaCommand.setNome(this.nome);
+        pessoaCommand.setUuid(this.uuid);
+        pessoaCommand.setIdEndereco(this.idEndereco);
+        pessoaCommand.setUuidEndereco(this.uuidEndereco);
+        return pessoaCommand;
     }
 }
