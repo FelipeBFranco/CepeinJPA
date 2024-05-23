@@ -1,12 +1,12 @@
 package cepein.mapeamento.app.gateways;
 
-import cepein.mapeamento.acore.domain.models.Produto;
+import cepein.mapeamento.acore.domain.models.produto.ProdutoCommand;
+import cepein.mapeamento.acore.domain.models.produto.ProdutoQuery;
+import cepein.mapeamento.utils.clean.application.gateway.StorageGateway;
 
 import java.util.List;
 
-public interface ProdutoGateway {
-    Produto encontrarProdutoPorId(Long id);
-    List<Produto> encontrarTodasOsProduto();
-    void salvarProduto(Produto produto);
-    void deletarProdutoPorId(Long id);
+public interface  ProdutoGateway extends StorageGateway<ProdutoCommand,ProdutoQuery,Long> {
+    List<ProdutoQuery> encontrarTodasOsProduto();
+
 }
