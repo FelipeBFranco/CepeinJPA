@@ -1,4 +1,4 @@
-package cepein.mapeamento.infra.persistence.jpa.entities;
+package cepein.mapeamento.infra.persistence.jpa.entities.pessoa.pessoaProduto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
