@@ -1,5 +1,6 @@
-package cepein.mapeamento.infra.persistence.jpa.entities;
+package cepein.mapeamento.infra.persistence.jpa.entities.endereco;
 
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.JpaPessoaQueryEntity;
 import jakarta.persistence.*;
 import lombok.*;
 @Setter
@@ -9,9 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "endereco")
-public class JpaEnderecoEntity {
+public class JpaEnderecoQueryEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_endereco;
 
     private String uuid;
@@ -25,10 +26,10 @@ public class JpaEnderecoEntity {
     private String estado;
 
     @OneToOne(mappedBy = "enderecoPorId")
-    private JpaPessoaEntity pessoaPorId;
+    private JpaPessoaQueryEntity pessoaPorId;
 
     @OneToOne(mappedBy = "enderecoPorUuid")
-    private JpaPessoaEntity pessoaPorUuid;
+    private JpaPessoaQueryEntity pessoaPorUuid;
 
 
 }
