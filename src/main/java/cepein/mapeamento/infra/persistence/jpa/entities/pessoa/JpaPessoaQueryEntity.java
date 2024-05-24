@@ -1,5 +1,11 @@
-package cepein.mapeamento.infra.persistence.jpa.entities;
+package cepein.mapeamento.infra.persistence.jpa.entities.pessoa;
 
+import cepein.mapeamento.infra.persistence.jpa.entities.curso.JpaCursoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.endereco.JpaEnderecoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pedido.JpaPedidoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.pessoaPedido.JpaPessoaPedidoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.pessoaProduto.JpaPessoaProdutoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.produto.JpaProdutoQueryEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,10 +17,10 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "pessoa")
-public class JpaPessoaEntity {
+public class JpaPessoaQueryEntity {
+
     @Id
     @Column(name = "id_pessoa")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -23,19 +29,19 @@ public class JpaPessoaEntity {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "id_endereco_fk", referencedColumnName = "id_endereco")
-    private JpaEnderecoEntity enderecoPorId;
+    private JpaEnderecoQueryEntity enderecoPorId;
 
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "uuid_endereco_fk", referencedColumnName = "uuid")
-    private JpaEnderecoEntity enderecoPorUuid;
+    private JpaEnderecoQueryEntity enderecoPorUuid;
 
 
     @OneToMany(mappedBy = "pessoaPorId", cascade = CascadeType.ALL)
-    private List<JpaCursoEntity> cursoPorId;
+    private List<JpaCursoQueryEntity> cursoPorId;
 
     @OneToMany(mappedBy = "pessoaPorUuid", cascade = CascadeType.ALL)
-    private List<JpaCursoEntity> cursoPorUuid;
+    private List<JpaCursoQueryEntity> cursoPorUuid;
 
     @ManyToMany
     @JoinTable(name="pessoa_produto",
@@ -43,10 +49,10 @@ public class JpaPessoaEntity {
             @JoinColumn(name="id_pessoa_fk", referencedColumnName="id_pessoa"),
             inverseJoinColumns=
             @JoinColumn(name="id_produto_fk", referencedColumnName="id_produto"))
-    private List<JpaProdutoEntity> produtoListComJoinTable;
+    private List<JpaProdutoQueryEntity> produtoListComJoinTable;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<JpaPessoaProdutoEntity> produtoListComEmbeddable;
+    private List<JpaPessoaProdutoQueryEntity> produtoListComEmbeddable;
 
 
     @ManyToMany
@@ -55,10 +61,10 @@ public class JpaPessoaEntity {
             @JoinColumn(name="uuid_pessoa_fk", referencedColumnName="uuid"),
             inverseJoinColumns=
             @JoinColumn(name="uuid_pedido_fk", referencedColumnName="uuid"))
-    private List<JpaPedidoEntity> pedidoListComJoinTable;
+    private List<JpaPedidoQueryEntity> pedidoListComJoinTable;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<JpaPessoaPedidoEntity> pedidoListComEmbeddable;
+    private List<JpaPessoaPedidoQueryEntity> pedidoListComEmbeddable;
 
 
 }
