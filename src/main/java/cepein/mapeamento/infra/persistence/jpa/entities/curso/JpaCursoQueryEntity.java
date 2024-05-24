@@ -1,6 +1,6 @@
-package cepein.mapeamento.infra.persistence.jpa.entities;
+package cepein.mapeamento.infra.persistence.jpa.entities.curso;
 
-import cepein.mapeamento.acore.domain.models.Pessoa;
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.JpaPessoaQueryEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,20 +11,18 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "curso")
-public class JpaCursoEntity {
-
+public class JpaCursoQueryEntity {
     @Id
     @Column(name = "id_curso")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "id_pessoa_fk" , referencedColumnName = "id_pessoa")
-    private JpaPessoaEntity pessoaPorId;
+    private JpaPessoaQueryEntity pessoaPorId;
 
     @ManyToOne
     @JoinColumn(name = "uuid_pessoa_fk", referencedColumnName = "uuid")
-    private JpaPessoaEntity pessoaPorUuid;
+    private JpaPessoaQueryEntity pessoaPorUuid;
 }
