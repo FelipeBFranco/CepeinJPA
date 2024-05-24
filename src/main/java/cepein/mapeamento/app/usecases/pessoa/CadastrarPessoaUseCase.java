@@ -2,7 +2,7 @@ package cepein.mapeamento.app.usecases.pessoa;
 
 import cepein.mapeamento.app.gateways.PessoaGatway;
 import cepein.mapeamento.infra.adapters.http.forms.PessoaForms;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class CadastrarPessoaUseCase implements UseCaseRequest<PessoaForms> {
     private final PessoaGatway pessoaGatway;

@@ -2,7 +2,7 @@ package cepein.mapeamento.app.usecases.endereco;
 
 import cepein.mapeamento.acore.domain.models.endereco.EnderecoQuery;
 import cepein.mapeamento.app.gateways.EnderecoGateway;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseResponse;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseResponse;
 
 import java.util.List;
 

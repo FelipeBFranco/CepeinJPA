@@ -1,7 +1,7 @@
 package cepein.mapeamento.app.usecases.pedido;
 
 import cepein.mapeamento.app.gateways.PedidoGateway;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class DeletarPedidoUseCase implements UseCaseRequest<Long> {
     private final PedidoGateway pedidoGateway;

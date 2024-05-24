@@ -6,7 +6,7 @@ import cepein.mapeamento.app.gateways.PessoaGatway;
 import cepein.mapeamento.app.gateways.PessoaPedidoGateway;
 import cepein.mapeamento.app.services.pessoa.VerificarExistenciaPessoa;
 import cepein.mapeamento.infra.adapters.http.forms.PessoaPedidoForms;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 import java.util.ArrayList;
 import java.util.List;

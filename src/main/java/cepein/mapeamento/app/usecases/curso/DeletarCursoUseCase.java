@@ -1,7 +1,7 @@
 package cepein.mapeamento.app.usecases.curso;
 
 import cepein.mapeamento.app.gateways.CursoGateway;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class DeletarCursoUseCase implements UseCaseRequest<Long> {
     private final CursoGateway cursoGateway;

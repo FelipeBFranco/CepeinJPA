@@ -2,7 +2,7 @@ package cepein.mapeamento.app.usecases.pessoa;
 
 import cepein.mapeamento.app.gateways.PessoaGatway;
 import cepein.mapeamento.app.services.pessoa.VerificarExistenciaPessoa;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class DeletarPessoaUseCase implements UseCaseRequest<Long> {
     private final PessoaGatway pessoaGatway;

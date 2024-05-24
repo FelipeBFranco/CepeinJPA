@@ -2,7 +2,7 @@ package cepein.mapeamento.app.usecases.pessoa;
 
 import cepein.mapeamento.acore.domain.models.pessoa.PessoaQuery;
 import cepein.mapeamento.app.gateways.PessoaGatway;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseResponse;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseResponse;
 
 import java.util.List;
 

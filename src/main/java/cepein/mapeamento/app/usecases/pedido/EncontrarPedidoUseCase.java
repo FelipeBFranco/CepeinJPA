@@ -2,7 +2,7 @@ package cepein.mapeamento.app.usecases.pedido;
 
 import cepein.mapeamento.acore.domain.models.pedido.PedidoQuery;
 import cepein.mapeamento.app.gateways.PedidoGateway;
-import cepein.mapeamento.utils.clean.application.useCase.UseCase;
+import cepein.mapeamento.utils.clean.application.usecase.UseCase;
 
 public class EncontrarPedidoUseCase implements UseCase<Long,PedidoQuery> {
     private final PedidoGateway pedidoGateway;

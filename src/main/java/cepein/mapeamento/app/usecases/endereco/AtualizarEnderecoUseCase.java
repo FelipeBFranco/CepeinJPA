@@ -3,7 +3,7 @@ package cepein.mapeamento.app.usecases.endereco;
 import cepein.mapeamento.acore.domain.models.endereco.EnderecoQuery;
 import cepein.mapeamento.app.gateways.EnderecoGateway;
 import cepein.mapeamento.infra.adapters.http.forms.EnderecoForms;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class AtualizarEnderecoUseCase implements UseCaseRequest<EnderecoForms> {
 

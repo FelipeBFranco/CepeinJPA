@@ -2,7 +2,7 @@ package cepein.mapeamento.app.usecases.produto;
 
 import cepein.mapeamento.acore.domain.models.produto.ProdutoQuery;
 import cepein.mapeamento.app.gateways.ProdutoGateway;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseResponse;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseResponse;
 
 import java.util.List;
 

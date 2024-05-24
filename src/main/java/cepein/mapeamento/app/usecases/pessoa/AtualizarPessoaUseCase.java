@@ -3,7 +3,7 @@ package cepein.mapeamento.app.usecases.pessoa;
 import cepein.mapeamento.acore.domain.models.pessoa.PessoaQuery;
 import cepein.mapeamento.app.gateways.PessoaGatway;
 import cepein.mapeamento.infra.adapters.http.forms.PessoaForms;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class AtualizarPessoaUseCase implements UseCaseRequest<PessoaForms> {
 

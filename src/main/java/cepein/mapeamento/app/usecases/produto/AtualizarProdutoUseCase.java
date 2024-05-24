@@ -3,7 +3,7 @@ package cepein.mapeamento.app.usecases.produto;
 import cepein.mapeamento.acore.domain.models.produto.ProdutoQuery;
 import cepein.mapeamento.app.gateways.ProdutoGateway;
 import cepein.mapeamento.infra.adapters.http.forms.ProdutoForms;
-import cepein.mapeamento.utils.clean.application.useCase.UseCaseRequest;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
 public class AtualizarProdutoUseCase implements UseCaseRequest<ProdutoForms> {
 
