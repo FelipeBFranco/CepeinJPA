@@ -1,59 +1,60 @@
 package cepein.mapeamento.infra.persistence.jpa.mapper;
 
-import cepein.mapeamento.acore.domain.models.Pedido;
-import cepein.mapeamento.acore.domain.models.Pessoa;
-import cepein.mapeamento.infra.persistence.jpa.entities.JpaPedidoEntity;
-import cepein.mapeamento.infra.persistence.jpa.entities.JpaPessoaEntity;
-import cepein.mapeamento.infra.persistence.jpa.entities.JpaPessoaPedidoEntity;
-import cepein.mapeamento.infra.persistence.jpa.entities.JpaPessoaProdutoEntity;
+import cepein.mapeamento.acore.domain.models.pedido.PedidoCommand;
+import cepein.mapeamento.acore.domain.models.pedido.PedidoQuery;
+import cepein.mapeamento.acore.domain.models.pessoa.PessoaQuery;
+import cepein.mapeamento.infra.persistence.jpa.entities.pedido.JpaPedidoCommandEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pedido.JpaPedidoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.JpaPessoaQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.pessoaPedido.JpaPessoaPedidoQueryEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class JpaPedidoMapper {
-    public static JpaPedidoEntity toEntity(Pedido pedidoDomain){
-        return JpaPedidoEntity.builder()
-                .id(pedidoDomain.getId())
-                .uuid(pedidoDomain.getUuid())
-                .descricao(pedidoDomain.getDescricao())
+    public static JpaPedidoCommandEntity toEntity(PedidoCommand pedidoCommand){
+        return JpaPedidoCommandEntity.builder()
+                .id(pedidoCommand.getId())
+                .uuid(pedidoCommand.getUuid())
+                .descricao(pedidoCommand.getDescricao())
                 .build();
     }
 
-    public static Pedido toDomain(JpaPedidoEntity jpaPedidoEntity){
-        return Pedido.builder()
-                .id(jpaPedidoEntity.getId())
-                .uuid(jpaPedidoEntity.getUuid())
-                .descricao(jpaPedidoEntity.getDescricao())
-                .pessoaListComJoinTable(JpaPedidoMapper.pessoaDePedidoToDomain(jpaPedidoEntity.getPessoaListComJoinTable()))
-                .pessoaListComEmbeddable(JpaPedidoMapper.pessoaProdutoDePedidoToDomain(jpaPedidoEntity.getPessoaListComEmbeddable()))
+    public static PedidoQuery toDomain(JpaPedidoQueryEntity jpaPedidoQueryEntity){
+        return PedidoQuery.builder()
+                .id(jpaPedidoQueryEntity.getId())
+                .uuid(jpaPedidoQueryEntity.getUuid())
+                .descricao(jpaPedidoQueryEntity.getDescricao())
+                .pessoaQueryListComJoinTable(JpaPedidoMapper.pessoaDePedidoToDomain(jpaPedidoQueryEntity.getPessoaListComJoinTable()))
+                .pessoaQueryListComEmbeddable(JpaPedidoMapper.pessoaProdutoDePedidoToDomain(jpaPedidoQueryEntity.getPessoaListComEmbeddable()))
                 .build();
     }
-    public static List<Pedido> toDomain(List<JpaPedidoEntity> jpaPedidoEntityList){
-        return jpaPedidoEntityList.stream()
+    public static List<PedidoQuery> toDomain(List<JpaPedidoQueryEntity> jpaPedidoQueryEntityList){
+        return jpaPedidoQueryEntityList.stream()
                 .map(JpaPedidoMapper::toDomain)
                 .collect(Collectors.toList());
     }
-    public static List<Pessoa> pessoaDePedidoToDomain(List<JpaPessoaEntity> jpaPessoaEntityList){
+    public static List<PessoaQuery> pessoaDePedidoToDomain(List<JpaPessoaQueryEntity> jpaPessoaQueryEntityList){
 
-        return jpaPessoaEntityList
+        return jpaPessoaQueryEntityList
                 .stream()
-                .map(jpaPessoaEntity ->Pessoa.builder()
+                .map(jpaPessoaEntity -> PessoaQuery.builder()
                         .id(jpaPessoaEntity.getId())
                         .uuid(jpaPessoaEntity.getUuid())
                         .nome(jpaPessoaEntity.getNome())
-                        .enderecoPorId(JpaPessoaMapper.toDomain(jpaPessoaEntity.getEnderecoPorId()))
-                        .enderecoPorUuid(JpaPessoaMapper.toDomain(jpaPessoaEntity.getEnderecoPorUuid()))
+                        .enderecoQueryPorId(JpaPessoaMapper.toDomain(jpaPessoaEntity.getEnderecoPorId()))
+                        .enderecoQueryPorUuid(JpaPessoaMapper.toDomain(jpaPessoaEntity.getEnderecoPorUuid()))
                         .cursoPorId(JpaPessoaMapper.cursoDePessoaToDomain(jpaPessoaEntity.getCursoPorId()))
                         .cursoPorUuid(JpaPessoaMapper.cursoDePessoaToDomain(jpaPessoaEntity.getCursoPorUuid()))
-                        .produtoListComJoinTable(JpaPessoaMapper.produtoDePessoatoDomain(jpaPessoaEntity.getProdutoListComJoinTable()))
-                        .produtoListComEmbeddable(JpaPessoaMapper.pessoaProdutoDePessoaToDomain(jpaPessoaEntity.getProdutoListComEmbeddable()))
+                        .produtoQueryListComJoinTable(JpaPessoaMapper.produtoDePessoatoDomain(jpaPessoaEntity.getProdutoListComJoinTable()))
+                        .produtoQueryListComEmbeddable(JpaPessoaMapper.pessoaProdutoDePessoaToDomain(jpaPessoaEntity.getProdutoListComEmbeddable()))
                         .build() )
                 .collect(Collectors.toList());
     }
-    public static List<Pessoa> pessoaProdutoDePedidoToDomain(List<JpaPessoaPedidoEntity> jpaPessoaProdutoEntityEntityList){
-        List<JpaPessoaEntity> pessoaEntityList = jpaPessoaProdutoEntityEntityList
+    public static List<PessoaQuery> pessoaProdutoDePedidoToDomain(List<JpaPessoaPedidoQueryEntity> jpaPessoaProdutoEntityEntityList){
+        List<JpaPessoaQueryEntity> pessoaEntityList = jpaPessoaProdutoEntityEntityList
                 .stream()
-                .map(JpaPessoaPedidoEntity::getPessoa)
+                .map(JpaPessoaPedidoQueryEntity::getPessoa)
                 .collect(Collectors.toList());
         return JpaProdutoMapper.pessoaDeProdutoToDomain(pessoaEntityList);
     }
