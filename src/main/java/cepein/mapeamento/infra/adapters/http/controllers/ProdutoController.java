@@ -6,6 +6,7 @@ import cepein.mapeamento.infra.adapters.http.dtos.ProdutoDto;
 import cepein.mapeamento.infra.adapters.http.forms.ProdutoForms;
 import cepein.mapeamento.infra.adapters.http.viewmodels.ProdutoViewModel;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,48 +19,44 @@ import java.util.stream.Collectors;
 public class ProdutoController {
 
     private final ProdutoGateway produtoGateway;
-
+    @Autowired
     public ProdutoController(ProdutoGateway produtoGateway){
         this.produtoGateway = produtoGateway;
     }
 
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<ProdutoDto> procurarProduto(@PathVariable Long id){
+
+        EncontrarProdutoUseCase encontrarProdutoUseCase = new EncontrarProdutoUseCase(this.produtoGateway);
+        ProdutoDto produtoDto = ProdutoViewModel.toDto(encontrarProdutoUseCase.execute(id));
+
+        return ResponseEntity.ok(produtoDto);
+    }
     @GetMapping("/listar")
     public ResponseEntity<List<ProdutoDto>> listarProdutos(){
         EncontrarListaDeProdutoUseCase encontrarListaDeProdutoUseCase = new EncontrarListaDeProdutoUseCase(this.produtoGateway);
-        List<ProdutoDto> produtoDtoList = encontrarListaDeProdutoUseCase.encontrarListaProduto()
+        List<ProdutoDto> produtoDtoList = encontrarListaDeProdutoUseCase.execute()
                 .stream()
                 .map(ProdutoViewModel::toDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok( produtoDtoList);
     }
-
-    @GetMapping("/procurar-por-id/{id}")
-    public ResponseEntity<ProdutoDto> procurarProduto(@PathVariable Long id){
-
-        EncontrarProdutoUseCase encontrarProdutoUseCase = new EncontrarProdutoUseCase(this.produtoGateway);
-        ProdutoDto produtoDto = ProdutoViewModel.toDto(encontrarProdutoUseCase.encontrarProdutoPorId(id));
-
-        return ResponseEntity.ok(produtoDto);
-    }
-
-    @PostMapping("/cadastrar-produto-pessoa")
+    @PostMapping("/cadastrar")
     public ResponseEntity<HttpStatus> cadastrarProdutoComPessoa(@RequestBody @Valid ProdutoForms produtoForms){
 
         CadastrarProdutoUseCase cadastrarProdutoUseCase = new CadastrarProdutoUseCase(this.produtoGateway);
-        cadastrarProdutoUseCase.criarProduto(produtoForms.converter());
 
+        cadastrarProdutoUseCase.execute(produtoForms);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/atualizar-produto")
+    @PutMapping("/atualizar")
     public ResponseEntity<HttpStatus> atualizarProduto(@RequestBody @Valid ProdutoForms produtoForms){
 
-        EncontrarProdutoUseCase encontrarProdutoUseCase = new EncontrarProdutoUseCase(this.produtoGateway);
         AtualizarProdutoUseCase atualizarProdutoUseCase =new AtualizarProdutoUseCase(this.produtoGateway);
 
-        atualizarProdutoUseCase.atualizarProduto(produtoForms.converter(encontrarProdutoUseCase.encontrarProdutoPorId(produtoForms.getId())));
-
+        atualizarProdutoUseCase.execute(produtoForms);
         return  ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -68,8 +65,7 @@ public class ProdutoController {
 
         DeletarProdutoUseCase deletarProdutoUseCase = new DeletarProdutoUseCase(this.produtoGateway);
 
-        deletarProdutoUseCase.deletarProduto(id);
-
+        deletarProdutoUseCase.execute(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

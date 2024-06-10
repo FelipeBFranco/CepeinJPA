@@ -1,27 +1,25 @@
 package cepein.mapeamento.infra.adapters.http.viewmodels;
 
+import cepein.mapeamento.acore.domain.models.endereco.EnderecoQuery;
 import cepein.mapeamento.infra.adapters.http.dtos.EnderecoDto;
-import cepein.mapeamento.infra.adapters.http.dtos.PessoaDto;
-import cepein.mapeamento.acore.domain.models.Endereco;
-import cepein.mapeamento.acore.domain.models.Pessoa;
 
 import java.util.Objects;
 
 public class EnderecoViewModel {
 
-    public static EnderecoDto toDto(Endereco endereco){
+    public static EnderecoDto toDto(EnderecoQuery enderecoQuery){
         return  EnderecoDto
                 .builder()
-                .idEndereco(endereco.getId_endereco())
-                .uuid(endereco.getUuid())
-                .rua(endereco.getRua())
-                .cep(endereco.getCep())
-                .cidade(endereco.getCidade())
-                .estado(endereco.getEstado())
-                .pessoaPorId(Objects.isNull(endereco.getPessoaPorId())?
-                        null : PessoaViewModel.toDto(endereco.getPessoaPorId()))
-                .pessoaPorUuid(Objects.isNull(endereco.getPessoaPorUuid())?
-                        null :PessoaViewModel.toDto(endereco.getPessoaPorUuid()))
+                .idEndereco(enderecoQuery.getId_endereco())
+                .uuid(enderecoQuery.getUuid())
+                .rua(enderecoQuery.getRua())
+                .cep(enderecoQuery.getCep())
+                .cidade(enderecoQuery.getCidade())
+                .estado(enderecoQuery.getEstado())
+                .pessoaPorId(Objects.isNull(enderecoQuery.getPessoaQueryPorId())?
+                        null : PessoaViewModel.toDto(enderecoQuery.getPessoaQueryPorId()))
+                .pessoaPorUuid(Objects.isNull(enderecoQuery.getPessoaQueryPorUuid())?
+                        null :PessoaViewModel.toDto(enderecoQuery.getPessoaQueryPorUuid()))
                 .build();
     }
 

@@ -1,15 +1,17 @@
 package cepein.mapeamento.app.usecases.pessoa;
 
-import cepein.mapeamento.acore.domain.models.Pessoa;
 import cepein.mapeamento.app.gateways.PessoaGatway;
+import cepein.mapeamento.infra.adapters.http.forms.PessoaForms;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
-public class CadastrarPessoaUseCase {
-    private PessoaGatway pessoaGatway;
+public class CadastrarPessoaUseCase implements UseCaseRequest<PessoaForms> {
+    private final PessoaGatway pessoaGatway;
 
     public CadastrarPessoaUseCase(PessoaGatway pessoaGatway){
         this.pessoaGatway = pessoaGatway;
     }
-    public void criarPessoa(Pessoa pessoa){
-        this.pessoaGatway.salvarPessoa(pessoa);
+    @Override
+    public void execute(PessoaForms pessoaForms ){
+        this.pessoaGatway.salvar(pessoaForms.converter());
     }
 }

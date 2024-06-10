@@ -1,14 +1,16 @@
 package cepein.mapeamento.app.usecases.pessoa;
 
-import cepein.mapeamento.acore.domain.models.Pessoa;
+import cepein.mapeamento.acore.domain.models.pessoa.PessoaQuery;
 import cepein.mapeamento.app.gateways.PessoaGatway;
+import cepein.mapeamento.utils.clean.application.usecase.UseCase;
 
-public class EncontrarPessoaUseCase {
-    private PessoaGatway pessoaGatway;
+public class EncontrarPessoaUseCase implements UseCase<Long,PessoaQuery> {
+    private final PessoaGatway pessoaGatway;
     public EncontrarPessoaUseCase(PessoaGatway pessoaGatway){
         this.pessoaGatway = pessoaGatway;
     }
-    public Pessoa encontrarPessoa(Long id){
-        return  this.pessoaGatway.encontrarPessoaPorId(id);
+    @Override
+    public PessoaQuery execute(Long id){
+        return  this.pessoaGatway.buscar(id);
     }
 }

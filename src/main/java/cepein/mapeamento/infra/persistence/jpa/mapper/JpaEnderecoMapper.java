@@ -1,17 +1,16 @@
 package cepein.mapeamento.infra.persistence.jpa.mapper;
 
-import cepein.mapeamento.acore.domain.models.Endereco;
-import cepein.mapeamento.acore.domain.models.Pessoa;
-import cepein.mapeamento.infra.persistence.jpa.entities.JpaEnderecoEntity;
-import cepein.mapeamento.infra.persistence.jpa.entities.JpaPessoaEntity;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import cepein.mapeamento.acore.domain.models.endereco.EnderecoCommand;
+import cepein.mapeamento.acore.domain.models.endereco.EnderecoQuery;
+import cepein.mapeamento.acore.domain.models.pessoa.PessoaQuery;
+import cepein.mapeamento.infra.persistence.jpa.entities.endereco.JpaEnderecoCommandEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.endereco.JpaEnderecoQueryEntity;
+import cepein.mapeamento.infra.persistence.jpa.entities.pessoa.JpaPessoaQueryEntity;
 
 public class JpaEnderecoMapper {
 
-    public static JpaEnderecoEntity toEntity(Endereco enderecoDomain){
-        return JpaEnderecoEntity.builder()
+    public static JpaEnderecoCommandEntity toEntity(EnderecoCommand enderecoDomain){
+        return JpaEnderecoCommandEntity.builder()
                 .id_endereco(enderecoDomain.getId_endereco())
                 .uuid(enderecoDomain.getUuid())
                 .rua(enderecoDomain.getRua())
@@ -20,30 +19,30 @@ public class JpaEnderecoMapper {
                 .estado(enderecoDomain.getEstado())
                 .build();
     }
-  public  static Endereco toDomain(JpaEnderecoEntity jpaEnderecoEntity){
-      return Endereco.builder()
-              .id_endereco(jpaEnderecoEntity.getId_endereco())
-              .uuid(jpaEnderecoEntity.getUuid())
-              .rua(jpaEnderecoEntity.getRua())
-              .cep(jpaEnderecoEntity.getCep())
-              .cidade(jpaEnderecoEntity.getCidade())
-              .estado(jpaEnderecoEntity.getEstado())
-              .pessoaPorId(JpaEnderecoMapper.toDomain(jpaEnderecoEntity.getPessoaPorId()))
-              .pessoaPorUuid(JpaEnderecoMapper.toDomain(jpaEnderecoEntity.getPessoaPorUuid()))
+  public  static EnderecoQuery toDomain(JpaEnderecoQueryEntity jpaEnderecoQueryEntity){
+      return EnderecoQuery.builder()
+              .id_endereco(jpaEnderecoQueryEntity.getId_endereco())
+              .uuid(jpaEnderecoQueryEntity.getUuid())
+              .rua(jpaEnderecoQueryEntity.getRua())
+              .cep(jpaEnderecoQueryEntity.getCep())
+              .cidade(jpaEnderecoQueryEntity.getCidade())
+              .estado(jpaEnderecoQueryEntity.getEstado())
+              .pessoaQueryPorId(JpaEnderecoMapper.toDomain(jpaEnderecoQueryEntity.getPessoaPorId()))
+              .pessoaQueryPorUuid(JpaEnderecoMapper.toDomain(jpaEnderecoQueryEntity.getPessoaPorUuid()))
               .build();
   }
 
-    public static Pessoa toDomain(JpaPessoaEntity jpaPessoaEntity){
-        return Pessoa.builder()
-                .id(jpaPessoaEntity.getId())
-                .uuid(jpaPessoaEntity.getUuid())
-                .nome(jpaPessoaEntity.getNome())
-                .cursoPorId(JpaPessoaMapper.cursoDePessoaToDomain(jpaPessoaEntity.getCursoPorId()))
-                .cursoPorUuid(JpaPessoaMapper.cursoDePessoaToDomain(jpaPessoaEntity.getCursoPorUuid()))
-                .produtoListComJoinTable(JpaPessoaMapper.produtoDePessoatoDomain(jpaPessoaEntity.getProdutoListComJoinTable()))
-                .produtoListComEmbeddable(JpaPessoaMapper.pessoaProdutoDePessoaToDomain(jpaPessoaEntity.getProdutoListComEmbeddable()))
-                .pedidoListComJoinTable(JpaPessoaMapper.pedidoDePessoaToDomain(jpaPessoaEntity.getPedidoListComJoinTable()))
-                .pedidoListComEmbeddable(JpaPessoaMapper.pessoaPedidoDePessoaToDomain(jpaPessoaEntity.getPedidoListComEmbeddable()))
+    public static PessoaQuery toDomain(JpaPessoaQueryEntity jpaPessoaQueryEntity){
+        return PessoaQuery.builder()
+                .id(jpaPessoaQueryEntity.getId())
+                .uuid(jpaPessoaQueryEntity.getUuid())
+                .nome(jpaPessoaQueryEntity.getNome())
+                .cursoPorId(JpaPessoaMapper.cursoDePessoaToDomain(jpaPessoaQueryEntity.getCursoPorId()))
+                .cursoPorUuid(JpaPessoaMapper.cursoDePessoaToDomain(jpaPessoaQueryEntity.getCursoPorUuid()))
+                .produtoQueryListComJoinTable(JpaPessoaMapper.produtoDePessoatoDomain(jpaPessoaQueryEntity.getProdutoListComJoinTable()))
+                .produtoQueryListComEmbeddable(JpaPessoaMapper.pessoaProdutoDePessoaToDomain(jpaPessoaQueryEntity.getProdutoListComEmbeddable()))
+                .pedidoQueryListComJoinTable(JpaPessoaMapper.pedidoDePessoaToDomain(jpaPessoaQueryEntity.getPedidoListComJoinTable()))
+                .pedidoQueryListComEmbeddable(JpaPessoaMapper.pessoaPedidoDePessoaToDomain(jpaPessoaQueryEntity.getPedidoListComEmbeddable()))
                 .build();
     }
 }

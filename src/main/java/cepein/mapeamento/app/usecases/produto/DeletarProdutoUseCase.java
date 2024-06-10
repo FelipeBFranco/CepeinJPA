@@ -1,13 +1,21 @@
 package cepein.mapeamento.app.usecases.produto;
 
 import cepein.mapeamento.app.gateways.ProdutoGateway;
+import cepein.mapeamento.utils.clean.application.usecase.UseCaseRequest;
 
-public class DeletarProdutoUseCase {
-    private ProdutoGateway produtoGateway;
+public class DeletarProdutoUseCase implements UseCaseRequest<Long> {
+    private final ProdutoGateway produtoGateway;
+    private Long idProduto;
     public DeletarProdutoUseCase(ProdutoGateway produtoGateway){
         this.produtoGateway = produtoGateway;
     }
-    public void deletarProduto(Long id){
-        this.produtoGateway.deletarProdutoPorId(id);
+    @Override
+    public void execute(Long id){
+        this.idProduto = id;
+        this.verificarExistenciaPedido();
+        this.produtoGateway.deletar(id);
+    }
+    private void verificarExistenciaPedido(){
+        this.produtoGateway.buscar(idProduto);
     }
 }
